@@ -28,3 +28,13 @@ To get started with this project, follow these steps:
 
 3. **Install required R packages (if not already installed):
    install.packages(c("tidyverse", "ggplot2", "fBasics","GGally","knitr","FactoMineR","factoextra","lmtest"))
+
+## Usage
+
+Open the R scripts provided in the repository (e.g., wine_quality_analysis.R).
+Run the scripts step by step to perform:
+Data cleaning
+Descriptive statistics
+Exploratory Data Analysis (EDA)
+Linear regression modeling
+Review the plots, summaries, and regression results to interpret the analysis.
