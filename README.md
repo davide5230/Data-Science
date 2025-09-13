@@ -6,8 +6,8 @@ Welcome to my **Data Science portfolio**! This repository contains a collection 
 
 ## About Me
 🎓 Graduated in **Computer and Automation Engineering** and **Corporate Legal Practitioner**, with a **Master in Data Science**.  
-💼 Experienced professional working in **Guardia di Finanza** since 2019, with strong skills in leadership, teamwork, and problem-solving under high standards.  
-💻 Passionate about **data-driven solutions, AI, and software development**.
+💼 Experienced professional working in **Guardia di Finanza** since 2019, with strong skills in leadership, teamwork and problem-solving under high standards.  
+💻 Passionate about **data-driven solutions, AI and software development**.
 
 ---
 
