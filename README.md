@@ -1,3 +1,7 @@
+## Dataset
+The dataset used in this project comes from Kaggle: https://www.kaggle.com/datasets/yasserh/wine-quality-dataset
+
+
 # Wine Quality Linear Regression Analysis
 
 This repository contains an analysis of the **Wine Quality Dataset** using **R**. The project covers the full data analysis workflow, including:
