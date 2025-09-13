@@ -1,6 +1,6 @@
 # Data Science Portfolio
 
-Welcome to my **Data Science portfolio**! This repository contains a collection of projects that demonstrate my skills in **Data Analysis, Machine Learning, and Artificial Intelligence**. Each project is organized in its own folder and includes a detailed explanation, dataset (if public), code and results.
+Welcome to my **Data Science portfolio**! This repository contains a collection of projects that demonstrate my skills in **Data Analysis, Machine Learning and Artificial Intelligence**. Each project is organized in its own folder and includes a detailed explanation, dataset (if public), code and results.
 
 ---
 
