@@ -15,6 +15,7 @@ The project covers the full data analysis workflow, including:
 ## Dataset
 The dataset contains responses collected through a structured **interview survey**.  
 Each record corresponds to a respondent and includes multiple-choice questions (Q1–Q13) covering usage, perceptions, and behaviors.
+Due to licensing restrictions, the dataset is not publicly included. To reproduce the pipeline, provide your own dataset in .csv format under a data/ directory.
 
 ## Summary
 
