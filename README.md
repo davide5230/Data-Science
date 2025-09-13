@@ -17,7 +17,7 @@ Welcome to my **Data Science portfolio**! This repository contains a collection 
 
 | Project | Description | Skills & Tools |
 |---------|-------------|----------------|
-| [Dataset Analysis](link) | Explore and analyze real-world datasets, perform data cleaning, visualization, and generate actionable insights. | Python, Pandas, NumPy, Matplotlib, Seaborn, Jupyter, R |
+| [Dataset Analysis](link) | Explore and analyze real-world datasets, perform data cleaning, visualization and generate actionable insights. | Python, Pandas, NumPy, Matplotlib, Seaborn, Jupyter, R |
 | [ML Projects](link) | Develop and train machine learning models for prediction and classification tasks, evaluating performance with metrics and visualizations. | Python, Scikit-learn, Pandas, NumPy, Jupyter |
 | [Dashboard Python](link) | Build interactive dashboards and web apps to present data analysis and ML results in a user-friendly way. | Python, Flask, Dash, Plotly, Jupyter |
 
