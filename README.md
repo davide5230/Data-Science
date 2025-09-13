@@ -1,7 +1,3 @@
-## Dataset
-The dataset used in this project comes from Kaggle: https://www.kaggle.com/datasets/yasserh/wine-quality-dataset
-
-
 # Wine Quality Linear Regression Analysis
 
 This repository contains an analysis of the **Wine Quality Dataset** using **R**. The project covers the full data analysis workflow, including:
@@ -18,6 +14,9 @@ This report summarizes the analyses conducted on the dataset regarding the quali
 Subsequently, a **multiple linear regression** was performed to investigate the relationships between wine quality (response variable) and the other physicochemical variables. By applying data cleaning techniques and removing outliers, the model showed a significant improvement in fit. In particular, the **Multiple R-squared**, initially 0.2819, increased to 0.9006, indicating that the final model explains most of the variability in wine quality.  
 
 **Note:** The regression results should be interpreted with caution due to the presence of heteroscedasticity.
+
+## Dataset
+The dataset used in this project comes from Kaggle: https://www.kaggle.com/datasets/yasserh/wine-quality-dataset
 
 ## Getting Started
 
