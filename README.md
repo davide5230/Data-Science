@@ -15,6 +15,8 @@ Subsequently, a **multiple linear regression** was performed to investigate the 
 
 **Note:** The regression results should be interpreted with caution due to the presence of heteroscedasticity.
 
+![Wine Quality EDA](wine_plot.png)
+
 ## Dataset
 The dataset used in this project comes from Kaggle: https://www.kaggle.com/datasets/yasserh/wine-quality-dataset
 
@@ -29,8 +31,16 @@ To get started with this project, follow these steps:
 2. **Navigate to the project directory:
    cd wine_quality_lm_analysis
 
-3. **Install required R packages (if not already installed):
-   install.packages(c("tidyverse", "ggplot2", "fBasics","GGally","knitr","FactoMineR","factoextra","lmtest"))
+3. **Install required R packages** (if not already installed):
+   ```R
+   install.packages(c("tidyverse",  # data manipulation & visualization
+                      "ggplot2",    # plots
+                      "dplyr",      # data wrangling
+                      "GGally",     # correlation plots
+                      "FactoMineR", # multivariate analysis
+                      "factoextra", # visualization of multivariate data
+                      "lmtest",     # regression diagnostics
+                      "knitr"))     # report generation
 
 ## Usage
 
@@ -41,3 +51,7 @@ Descriptive statistics
 Exploratory Data Analysis (EDA)
 Linear regression modeling
 Review the plots, summaries, and regression results to interpret the analysis.
+
+```markdown
+---
+This project demonstrates skills in **data preprocessing, exploratory data analysis, and predictive modeling in R**, with a focus on building and evaluating regression models.
