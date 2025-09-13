@@ -38,7 +38,7 @@ To get started with this project, follow these steps:
 
    pip install pandas matplotlib seaborn scikit-learn xgboost imbalanced-learn
 
-##Usage
+## Usage
 
 Open the Jupyter Notebook or Python scripts provided in the repository and run them step by step to:
 
