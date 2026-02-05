@@ -53,7 +53,7 @@ To get started with this project, follow these steps:
 
    pip install -r requirements.txt
 
-##Usage
+## Usage
 
 1. Place your dataset in the data/ directory (CSV format).
 
