@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Environment variables
+.env
+
+# macOS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+# Local data files
+data/
+*.csv
+*.xlsx
+
+# Logs
+*.log
+
+# Generated output
+outputs/business_report.json
