@@ -15,9 +15,9 @@ A portfolio of practical projects across Data Analysis, Machine Learning, Busine
 
 | Project | Description | Skills & Tools |
 |---------|-------------|----------------|
+| [AI & Automation](https://github.com/davide5230/Data-Science/tree/main/AI%20%26%20Automation) | Develop AI-powered applications and automation workflows for data processing, analysis, and task optimization, integrating APIs and intelligent models into practical solutions. | Python, APIs, LLMs, Automation, Jupyter |
 | [Data](https://github.com/davide5230/Data-Science/tree/main/Data) | Analyze datasets and build data-driven dashboards using Python and R, combining statistical analysis, visualization, and interactive reporting to uncover insights and communicate results effectively. | Python, R, Pandas, NumPy, Matplotlib, Dashboarding |
 | [ML Projects](https://github.com/davide5230/Data-Science/tree/main/ML%20Projects) | Develop and train machine learning models for prediction and classification tasks, evaluating performance with metrics and visualizations. | Python, Scikit-learn, Pandas, NumPy, Jupyter |
-| [AI & Automation](https://github.com/davide5230/Data-Science/tree/main/AI%20%26%20Automation) | Develop AI-powered applications and automation workflows for data processing, analysis, and task optimization, integrating APIs and intelligent models into practical solutions. | Python, APIs, LLMs, Automation, Jupyter |
 
 ---
 
