@@ -6,8 +6,11 @@ A portfolio of practical projects across Data Analysis, Machine Learning, Busine
 
 ## About Me
 🎓 Background in Computer & Automation Engineering, Data Science and business/legal studies.
+
 💻 Focused on building practical solutions using Python, Data Analytics, Machine Learning, AI and Automation.
+
 🤖 Currently exploring how LLMs, structured data and automation workflows can be combined to solve real business problems.
+
 💼 Professional experience in the Italian Guardia di Finanza since 2019, developing analytical thinking, responsibility and problem-solving in complex environments.
 
 ---
