@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Environment variables
+.env
+
+# macOS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+# Local/private datasets
+data/*
+!data/README.md
+
+# Generated NLP outputs
+outputs/*
+!outputs/README.md
+
+# Model/cache artifacts
+*.pkl
+*.joblib
+*.bin
+*.pt
+*.pth
+
+# Hugging Face / model caches
+.cache/
+huggingface/
+
+# Logs
+*.log
