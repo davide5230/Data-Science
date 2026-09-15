@@ -62,9 +62,7 @@ A key design principle is that **Python performs numerical calculations and the 
 ## Dataset
 
 The project uses a synthetic transactional dataset generated directly in Python.
-
 Each row represents a simulated sale and contains date, product, region, units sold, unit price, unit cost, revenue, cost, profit and margin.
-
 The dataset includes five product categories:
 
 - Laptop
@@ -80,7 +78,6 @@ and three geographical regions:
 - South
 
 Prices, costs and quantities are generated according to product-specific business rules rather than independently random values.
-
 Controlled anomalies are also injected into the data to simulate real analytical problems such as unusually low margins or increased supplier costs.
 
 ---
@@ -108,9 +105,7 @@ The analytical pipeline calculates:
 ## AI Layer
 
 The aggregated analytics are converted into a structured JSON payload before being passed to the LLM.
-
 The model does **not** receive the raw transactional dataset. Instead, Python first transforms the source data into reliable business information.
-
 The local LLM generates:
 
 - Executive Summary
