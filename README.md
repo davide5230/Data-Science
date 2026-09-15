@@ -1,6 +1,6 @@
 # Data, AI & Automation Portfolio
 
-Welcome to my **Data Science portfolio**! This repository contains a collection of projects that demonstrate my skills in **Data Analysis, Machine Learning and Artificial Intelligence**. Each project is organized in its own folder and includes a detailed explanation, dataset (if public), code and results.
+A portfolio of practical projects across Data Analysis, Machine Learning, Business Analytics, AI and Automation. The projects evolve from exploratory analysis and predictive modeling toward AI-powered systems that combine deterministic data processing with intelligent interpretation and workflow automation.
 
 ---
 
