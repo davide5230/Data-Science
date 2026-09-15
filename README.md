@@ -23,9 +23,11 @@ A portfolio of practical projects across Data Analysis, Machine Learning, Busine
 ---
 
 ## Technical Skills
-- **Languages & Tools:** Python, SQL, Git/GitHub, Jupyter, Pandas, NumPy, Scikit-learn, TensorFlow, Flask, R  
-- **Areas:** Data Analysis, Machine Learning, AI, Big Data, Software Development  
-- **Soft Skills:** Leadership, Effective Communication, Team Management, Analytical Thinking
+- **Languages:** Python · SQL · R 
+- **Data:** Pandas · NumPy · Excel · Data Analysis · EDA 
+- **Machine Learning:** Scikit-learn · Classification · Regression · NLP
+- **AI & Automation:** LLMs · AI Models · Pydantic · APIs · Structured Outputs
+- **Development:** Git · GitHub · Jupyter · Flask · Dash
 
 ---
 
