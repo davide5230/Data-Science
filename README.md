@@ -17,7 +17,7 @@ Welcome to my **Data Science portfolio**! This repository contains a collection 
 |---------|-------------|----------------|
 | [Dataset Analysis](https://github.com/davide5230/Data-Science/tree/main/Dataset%20Analysis) | Explore and analyze real-world datasets, perform data cleaning, visualization and generate actionable insights. | Python, Pandas, NumPy, Matplotlib, Seaborn, Jupyter, R |
 | [ML Projects](https://github.com/davide5230/Data-Science/tree/main/ML%20Projects) | Develop and train machine learning models for prediction and classification tasks, evaluating performance with metrics and visualizations. | Python, Scikit-learn, Pandas, NumPy, Jupyter |
-| [AI & Automation](https://github.com/davide5230/Data-Science/tree/main/ML%20Projects) | Develop AI-powered applications and automation workflows for data processing, analysis, and task optimization, integrating APIs and intelligent models into practical solutions. | Python, APIs, LLMs, Automation, Jupyter |
+| [AI & Automation](https://github.com/davide5230/Data-Science/tree/main/AI%20%26%20Automation) | Develop AI-powered applications and automation workflows for data processing, analysis, and task optimization, integrating APIs and intelligent models into practical solutions. | Python, APIs, LLMs, Automation, Jupyter |
 
 ---
 
