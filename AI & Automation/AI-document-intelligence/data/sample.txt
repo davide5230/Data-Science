@@ -1,0 +1,317 @@
+NOVA TECH SOLUTIONS
+REMOTE WORK AND INFORMATION SECURITY POLICY
+
+Policy ID: HR-SEC-007
+Version: 2.0
+Effective Date: 1 September 2026
+Policy Owner: Human Resources & Information Security
+Review Cycle: Annual
+Classification: Internal Use Only
+
+1. PURPOSE
+
+This policy establishes the rules and responsibilities for employees who perform work outside Nova Tech Solutions offices. The objective is to support flexible working arrangements while maintaining productivity, operational continuity, information security, and compliance with company standards.
+
+Remote work is considered a flexible working arrangement and not an automatic employee entitlement. Approval depends on the employee's role, performance, operational requirements, security considerations, and applicable legal or contractual restrictions.
+
+This policy applies to permanent employees, temporary employees, interns, consultants, and contractors who access company systems or handle company information outside an authorized office location.
+
+2. ELIGIBILITY FOR REMOTE WORK
+
+Employees may request remote work when their responsibilities can be performed effectively without continuous physical presence in the office.
+
+Unless otherwise approved by the employee's manager and Human Resources, eligible employees may work remotely for up to three days per week.
+
+Managers must evaluate remote work requests based on:
+
+- the nature of the employee's role;
+- individual performance and reliability;
+- collaboration requirements;
+- customer and project needs;
+- availability of secure equipment;
+- internet connectivity;
+- legal, regulatory, or contractual restrictions.
+
+Employees who have joined the company within the previous 60 calendar days are normally expected to work primarily from the office. Exceptions may be approved by Human Resources when justified by business or personal circumstances.
+
+Remote work arrangements may be reviewed, modified, temporarily suspended, or withdrawn if business needs, employee performance, security risks, or organizational requirements change.
+
+3. WORKING HOURS AND AVAILABILITY
+
+Employees working remotely must follow their normal contractual working hours unless an alternative schedule has been formally approved.
+
+During working hours, employees must remain reasonably available through company-approved communication channels, including corporate email, Microsoft Teams, and the internal messaging platform.
+
+Employees are expected to:
+
+- attend scheduled meetings on time;
+- respond to urgent messages within a reasonable period;
+- keep their calendar updated;
+- communicate extended periods of unavailability to their manager;
+- maintain the same professional standards expected in the office.
+
+Remote work does not change existing rules concerning overtime, breaks, leave, sickness absence, or working time reporting.
+
+Employees should avoid routinely working outside their approved hours unless operational circumstances require it.
+
+4. APPROVED WORK LOCATIONS
+
+Remote work should normally be performed from the employee's registered home address or another private and secure location.
+
+Working from public places such as cafés, restaurants, airports, hotel lobbies, or public transportation is discouraged when confidential company information may be visible or discussed.
+
+Employees must not leave company devices unattended in public locations.
+
+When working outside their usual remote location for more than five consecutive working days, employees must inform their manager. Working from another country requires prior written approval from Human Resources due to possible tax, immigration, insurance, and regulatory implications.
+
+5. COMPANY DEVICES
+
+Employees must use company-managed devices for business activities whenever such devices have been provided.
+
+Company laptops, smartphones, storage devices, and accessories remain the property of Nova Tech Solutions and must be used primarily for authorized business purposes.
+
+Employees must not:
+
+- disable antivirus or endpoint protection software;
+- install unauthorized applications;
+- modify security settings without approval;
+- share company devices with family members or other individuals;
+- connect unknown USB devices;
+- store company information on personal cloud services.
+
+All company devices must be protected using a strong password or passphrase. Multi-factor authentication must be enabled whenever supported by the company system.
+
+Devices should be locked whenever the employee leaves the workstation, even for short periods.
+
+6. PERSONAL DEVICES
+
+Personal devices may only be used for company activities when explicitly authorized under the Bring Your Own Device program.
+
+Authorized personal devices must comply with company security requirements, including:
+
+- current operating system security updates;
+- device encryption;
+- password or biometric protection;
+- approved antivirus or security software;
+- remote wipe capability where technically possible.
+
+The company reserves the right to restrict access from personal devices that do not meet security requirements.
+
+Confidential or restricted company information must not be permanently stored on personal devices.
+
+7. NETWORK AND INTERNET SECURITY
+
+Employees must use a secure internet connection when accessing company systems remotely.
+
+Home Wi-Fi networks must be protected with a strong password and modern encryption standards. Employees should change default router administrator passwords whenever possible.
+
+Access to internal systems containing confidential or sensitive information must be performed through the company Virtual Private Network (VPN).
+
+Public Wi-Fi networks should be avoided. If public Wi-Fi must be used because no reasonable alternative is available, employees must connect through the corporate VPN before accessing company systems.
+
+Employees must not bypass security tools, network restrictions, or company monitoring controls.
+
+8. DATA CLASSIFICATION AND HANDLING
+
+Company information is classified into four categories:
+
+Public:
+Information approved for public distribution.
+
+Internal:
+Information intended for employees and authorized business partners.
+
+Confidential:
+Sensitive business information that could cause operational, financial, legal, or reputational damage if disclosed.
+
+Restricted:
+Highly sensitive information requiring the highest level of protection, including authentication credentials, certain customer records, financial information, and regulated personal data.
+
+Employees must handle information according to its classification.
+
+Confidential and Restricted information must only be stored in company-approved systems. Such information must not be sent to personal email accounts, copied to unauthorized external storage, or uploaded to unapproved cloud platforms.
+
+Printed documents containing Confidential or Restricted information should be avoided when working remotely. If printing is necessary, documents must be stored securely and destroyed using an appropriate method when no longer required.
+
+9. PASSWORDS AND AUTHENTICATION
+
+Employees are responsible for protecting their authentication credentials.
+
+Passwords must:
+
+- meet the minimum company complexity requirements;
+- not be reused across personal and corporate accounts;
+- not be shared with colleagues or external parties;
+- not be stored in unencrypted documents or spreadsheets.
+
+Employees should use the company-approved password manager when available.
+
+Multi-factor authentication is mandatory for remote access, corporate email, administrative systems, cloud platforms, and any application containing Confidential or Restricted information.
+
+Employees who suspect that their credentials have been compromised must immediately change the affected password and report the incident to the IT Security team.
+
+10. EMAIL AND PHISHING
+
+Email remains one of the most common sources of cybersecurity incidents.
+
+Employees must exercise caution when receiving unexpected messages, particularly those requesting:
+
+- passwords or authentication codes;
+- urgent payments;
+- changes to bank details;
+- downloads of unknown attachments;
+- access to unfamiliar websites;
+- confidential company information.
+
+Suspicious emails must be reported using the company's phishing reporting tool.
+
+Employees must not forward suspicious messages to colleagues as a warning, as this may increase the risk of accidental interaction with malicious content.
+
+11. USE OF ARTIFICIAL INTELLIGENCE TOOLS
+
+Employees may use company-approved artificial intelligence tools to support research, drafting, summarization, coding, data analysis, and other authorized business activities.
+
+Employees must not enter Confidential or Restricted information into public or unapproved AI systems.
+
+Before using AI-generated content for business decisions, customer communications, software deployment, legal documentation, financial analysis, or other material activities, employees are responsible for reviewing the output for accuracy, completeness, bias, and compliance with company requirements.
+
+AI-generated output must not be treated as automatically correct.
+
+Where required by internal procedures, employees must disclose the use of AI-generated content.
+
+The Information Security and Legal teams may prohibit the use of specific AI services if they present unacceptable privacy, intellectual property, security, or regulatory risks.
+
+12. CONFIDENTIAL MEETINGS AND COMMUNICATIONS
+
+Employees working remotely must take reasonable precautions to prevent unauthorized individuals from hearing confidential conversations.
+
+Headphones should be used for sensitive meetings when other people are nearby.
+
+Employees should avoid discussing confidential matters in public locations.
+
+Video meetings involving Confidential or Restricted information should be conducted from a private environment whenever possible.
+
+Meeting recordings may only be created when there is a legitimate business purpose and all applicable internal requirements have been satisfied.
+
+13. SECURITY INCIDENTS
+
+Employees must report suspected security incidents as soon as possible.
+
+Examples include:
+
+- loss or theft of a company device;
+- accidental disclosure of company information;
+- suspected malware infection;
+- phishing attacks;
+- unauthorized account access;
+- compromised passwords;
+- suspicious system behavior;
+- transmission of information to the wrong recipient.
+
+Security incidents must be reported to the IT Security team through the internal incident portal or, if the portal is unavailable, by telephone.
+
+Employees should not attempt to investigate serious security incidents independently unless instructed by IT Security.
+
+Lost or stolen devices must be reported immediately so that remote access can be disabled and, where possible, company data can be remotely erased.
+
+14. PHYSICAL SECURITY
+
+Employees are responsible for maintaining an appropriate level of physical security while working remotely.
+
+Company devices and documents should be stored in a secure location when not in use.
+
+Family members, visitors, and other unauthorized individuals must not use company devices or access company information.
+
+Employees should position screens in a way that reduces the risk of unauthorized viewing.
+
+When leaving a remote work location for an extended period, employees must ensure that devices are locked and sensitive documents are secured.
+
+15. SOFTWARE AND SYSTEM ACCESS
+
+Access to company systems is granted according to business need and the principle of least privilege.
+
+Employees must use only the accounts assigned to them.
+
+Shared credentials are prohibited unless explicitly approved for a specific technical purpose.
+
+Employees must not attempt to access systems, files, databases, or administrative functions that are not required for their responsibilities.
+
+Access rights may be reviewed periodically and removed when no longer necessary.
+
+16. DATA RETENTION AND DELETION
+
+Employees must follow company data retention requirements.
+
+Business information should be stored in approved corporate repositories rather than permanently retained on local device storage.
+
+Temporary copies of files should be deleted when no longer required.
+
+Employees must not delete records that are subject to a legal hold, investigation, regulatory requirement, or formal retention obligation.
+
+When an employee leaves the company or changes role, access rights and company data must be handled according to the offboarding or transfer procedure.
+
+17. MONITORING AND PRIVACY
+
+Nova Tech Solutions may monitor company devices, systems, network activity, authentication events, and corporate accounts for security, compliance, operational, and legal purposes, subject to applicable laws and internal privacy requirements.
+
+Employees should not expect personal privacy when using company-owned systems for business activities beyond the protections provided by applicable law and company policy.
+
+Monitoring activities must be proportionate, authorized, and limited to legitimate business purposes.
+
+18. EMPLOYEE RESPONSIBILITIES
+
+Employees working remotely are responsible for:
+
+- protecting company devices and information;
+- complying with security requirements;
+- using approved systems and applications;
+- reporting incidents promptly;
+- maintaining appropriate availability;
+- following data protection requirements;
+- completing mandatory security training;
+- applying the same professional standards expected in the office.
+
+Failure to follow this policy may result in restriction of remote work privileges, removal of system access, disciplinary action, or other measures permitted under company procedures and applicable law.
+
+19. MANAGER RESPONSIBILITIES
+
+Managers are responsible for ensuring that remote work arrangements remain compatible with operational requirements.
+
+Managers should:
+
+- establish clear expectations;
+- monitor outcomes rather than physical presence;
+- ensure appropriate communication within the team;
+- identify training or technology needs;
+- review remote work arrangements periodically;
+- escalate security or performance concerns when necessary.
+
+Managers must apply remote work rules consistently and avoid unfair treatment among employees performing comparable roles.
+
+20. EXCEPTIONS
+
+Exceptions to this policy must be documented and approved by the appropriate authority.
+
+Security-related exceptions require approval from the Information Security team.
+
+Employment-related exceptions may require approval from Human Resources.
+
+An approved exception does not automatically create a permanent right or precedent for other employees.
+
+21. POLICY VIOLATIONS
+
+Potential violations of this policy may be investigated by Human Resources, Information Security, Legal, Internal Audit, or other authorized functions.
+
+The company will consider the seriousness of the violation, its impact, whether it was intentional, and whether similar incidents have occurred previously.
+
+Corrective measures may include additional training, restriction of access privileges, withdrawal of remote work authorization, formal disciplinary action, or termination of the contractual relationship in serious cases.
+
+22. POLICY REVIEW
+
+This policy will be reviewed at least once every twelve months or earlier if required by changes in legislation, technology, organizational structure, security risks, or business operations.
+
+Employees will be informed of material changes through official company communication channels.
+
+Questions regarding this policy should be directed to Human Resources for employment-related matters or to the Information Security team for technical and security-related matters.
+
+END OF POLICY
