@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from pydantic import BaseModel
 
 app = FastAPI(
     title="AI Support Ticket Automation API",
@@ -8,6 +9,12 @@ app = FastAPI(
     ),
     version="1.0.0"
 )
+
+
+class TicketInput(BaseModel):
+    customer_id: str
+    subject: str
+    message: str
 
 
 @app.get("/")
