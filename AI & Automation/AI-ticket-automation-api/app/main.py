@@ -1,18 +1,18 @@
-from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
+from pathlib import Path
+import sqlite3
 from typing import Literal
 from uuid import uuid4
+
+from fastapi import FastAPI, HTTPException
 from ollama import chat
+from pydantic import BaseModel
 
 
-app = FastAPI(
-    title="AI Support Ticket Automation API",
-    description=(
-        "API for automated support ticket analysis, "
-        "classification and routing."
-    ),
-    version="1.0.0"
-)
+# ---------------------------------------------------------
+# Configuration
+# ---------------------------------------------------------
+
+DB_PATH = Path("data/tickets.db")
 
 CATEGORY_ROUTES = {
     "billing": "billing_team",
@@ -22,52 +22,16 @@ CATEGORY_ROUTES = {
     "general": "customer_support"
 }
 
-tickets_db = {}
 
-def classify_ticket(subject, message):
-    text = f"{subject} {message}".lower()
-
-    if any(word in text for word in [
-        "charged",
-        "payment",
-        "invoice",
-        "refund",
-        "billing"
-    ]):
-        return "billing"
-
-    if any(word in text for word in [
-        "error",
-        "bug",
-        "crash",
-        "login",
-        "technical"
-    ]):
-        return "technical"
-
-    if any(word in text for word in [
-        "account",
-        "password",
-        "profile",
-        "email"
-    ]):
-        return "account"
-
-    if any(word in text for word in [
-        "shipping",
-        "delivery",
-        "package",
-        "order"
-    ]):
-        return "shipping"
-
-    return "general"
-
+# ---------------------------------------------------------
+# Pydantic models
+# ---------------------------------------------------------
 
 class TicketInput(BaseModel):
     customer_id: str
     subject: str
     message: str
+
 
 class TicketAnalysis(BaseModel):
     category: Literal[
@@ -86,10 +50,13 @@ class TicketAnalysis(BaseModel):
     ]
 
     summary: str
+
+
 class TicketResponse(BaseModel):
     ticket_id: str
     customer_id: str
     subject: str
+    message: str
 
     category: Literal[
         "billing",
@@ -108,7 +75,132 @@ class TicketResponse(BaseModel):
 
     summary: str
     route_to: str
+
+    analysis_source: Literal[
+        "llm",
+        "rule_based_fallback"
+    ]
+
     status: Literal["routed"]
+
+
+# ---------------------------------------------------------
+# FastAPI
+# ---------------------------------------------------------
+
+app = FastAPI(
+    title="AI Support Ticket Automation API",
+    description=(
+        "API for automated support ticket analysis, "
+        "classification and routing."
+    ),
+    version="1.0.0"
+)
+
+
+# ---------------------------------------------------------
+# Database
+# ---------------------------------------------------------
+
+def init_db():
+    DB_PATH.parent.mkdir(
+        parents=True,
+        exist_ok=True
+    )
+
+    with sqlite3.connect(DB_PATH) as conn:
+        conn.execute(
+            """
+            CREATE TABLE IF NOT EXISTS tickets (
+                ticket_id TEXT PRIMARY KEY,
+                customer_id TEXT NOT NULL,
+                subject TEXT NOT NULL,
+                message TEXT NOT NULL,
+                category TEXT NOT NULL,
+                priority TEXT NOT NULL,
+                summary TEXT NOT NULL,
+                route_to TEXT NOT NULL,
+                analysis_source TEXT NOT NULL,
+                status TEXT NOT NULL
+            )
+            """
+        )
+
+
+def save_ticket(ticket: TicketResponse):
+    with sqlite3.connect(DB_PATH) as conn:
+        conn.execute(
+            """
+            INSERT INTO tickets (
+                ticket_id,
+                customer_id,
+                subject,
+                message,
+                category,
+                priority,
+                summary,
+                route_to,
+                analysis_source,
+                status
+            )
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """,
+            (
+                ticket.ticket_id,
+                ticket.customer_id,
+                ticket.subject,
+                ticket.message,
+                ticket.category,
+                ticket.priority,
+                ticket.summary,
+                ticket.route_to,
+                ticket.analysis_source,
+                ticket.status
+            )
+        )
+
+
+def get_all_tickets():
+    with sqlite3.connect(DB_PATH) as conn:
+        conn.row_factory = sqlite3.Row
+
+        rows = conn.execute(
+            "SELECT * FROM tickets"
+        ).fetchall()
+
+    return [
+        TicketResponse.model_validate(dict(row))
+        for row in rows
+    ]
+
+
+def get_ticket_by_id(ticket_id):
+    with sqlite3.connect(DB_PATH) as conn:
+        conn.row_factory = sqlite3.Row
+
+        row = conn.execute(
+            """
+            SELECT *
+            FROM tickets
+            WHERE ticket_id = ?
+            """,
+            (ticket_id,)
+        ).fetchone()
+
+    if row is None:
+        return None
+
+    return TicketResponse.model_validate(
+        dict(row)
+    )
+
+
+init_db()
+
+
+# ---------------------------------------------------------
+# LLM analysis
+# ---------------------------------------------------------
 
 TICKET_ANALYSIS_PROMPT = """
 You are a customer support ticket classifier.
@@ -142,6 +234,7 @@ Do not invent information that is not present in the ticket.
 Return the result using the required structured format.
 """.strip()
 
+
 def analyze_ticket(
     ticket: TicketInput,
     model="qwen3.5:4b"
@@ -172,26 +265,169 @@ def analyze_ticket(
         response.message.content
     )
 
-test_ticket = TicketInput(
-    customer_id="CUST-1042",
-    subject="I was charged twice",
-    message="My credit card shows two charges for the same order."
+
+# ---------------------------------------------------------
+# Deterministic fallback
+# ---------------------------------------------------------
+
+def classify_ticket_rule_based(subject, message):
+    text = f"{subject} {message}".lower()
+
+    if any(word in text for word in [
+        "charged",
+        "payment",
+        "invoice",
+        "refund",
+        "billing"
+    ]):
+        return "billing"
+
+    if any(word in text for word in [
+        "error",
+        "bug",
+        "crash",
+        "technical"
+    ]):
+        return "technical"
+
+    if any(word in text for word in [
+        "account",
+        "password",
+        "profile",
+        "login",
+        "authentication"
+    ]):
+        return "account"
+
+    if any(word in text for word in [
+        "shipping",
+        "delivery",
+        "package",
+        "shipment"
+    ]):
+        return "shipping"
+
+    return "general"
+
+
+def determine_priority_rule_based(subject, message):
+    text = f"{subject} {message}".lower()
+
+    critical_terms = [
+        "hacked",
+        "fraud",
+        "security breach",
+        "data loss",
+        "stolen account"
+    ]
+
+    high_terms = [
+        "charged twice",
+        "multiple charges",
+        "complete outage",
+        "cannot use service"
+    ]
+
+    if any(term in text for term in critical_terms):
+        return "critical"
+
+    if any(term in text for term in high_terms):
+        return "high"
+
+    return "medium"
+
+
+def fallback_analysis(ticket: TicketInput):
+    category = classify_ticket_rule_based(
+        ticket.subject,
+        ticket.message
+    )
+
+    priority = determine_priority_rule_based(
+        ticket.subject,
+        ticket.message
+    )
+
+    summary = (
+        ticket.message[:200]
+        if len(ticket.message) > 200
+        else ticket.message
+    )
+
+    return TicketAnalysis(
+        category=category,
+        priority=priority,
+        summary=summary
+    )
+
+
+# ---------------------------------------------------------
+# Endpoints
+# ---------------------------------------------------------
+
+@app.get("/")
+def root():
+    return {
+        "status": "online",
+        "service": "AI Support Ticket Automation API"
+    }
+
+
+@app.post(
+    "/tickets",
+    response_model=TicketResponse
 )
+def create_ticket(ticket: TicketInput):
 
-analysis = analyze_ticket(test_ticket)
+    try:
+        analysis = analyze_ticket(ticket)
+        analysis_source = "llm"
 
-print(analysis)
+    except Exception:
+        analysis = fallback_analysis(ticket)
+        analysis_source = "rule_based_fallback"
 
-print(analysis.category)
-print(analysis.priority)
-print(analysis.summary)
+    route_to = CATEGORY_ROUTES[
+        analysis.category
+    ]
+
+    ticket_id = (
+        f"TKT-{uuid4().hex[:8].upper()}"
+    )
+
+    ticket_response = TicketResponse(
+        ticket_id=ticket_id,
+        customer_id=ticket.customer_id,
+        subject=ticket.subject,
+        message=ticket.message,
+        category=analysis.category,
+        priority=analysis.priority,
+        summary=analysis.summary,
+        route_to=route_to,
+        analysis_source=analysis_source,
+        status="routed"
+    )
+
+    save_ticket(ticket_response)
+
+    return ticket_response
+
+
+@app.get(
+    "/tickets",
+    response_model=list[TicketResponse]
+)
+def get_tickets():
+    return get_all_tickets()
+
 
 @app.get(
     "/tickets/{ticket_id}",
     response_model=TicketResponse
 )
 def get_ticket(ticket_id: str):
-    ticket = tickets_db.get(ticket_id)
+
+    ticket = get_ticket_by_id(ticket_id)
 
     if ticket is None:
         raise HTTPException(
@@ -200,29 +436,3 @@ def get_ticket(ticket_id: str):
         )
 
     return ticket
-
-
-@app.post("/tickets", response_model=TicketResponse)
-def create_ticket(ticket: TicketInput):
-    analysis = analyze_ticket(ticket)
-
-    route_to = CATEGORY_ROUTES[
-        analysis.category
-    ]
-
-    ticket_id = f"TKT-{uuid4().hex[:8].upper()}"
-
-    ticket_response = TicketResponse(
-        ticket_id=ticket_id,
-        customer_id=ticket.customer_id,
-        subject=ticket.subject,
-        category=analysis.category,
-        priority=analysis.priority,
-        summary=analysis.summary,
-        route_to=route_to,
-        status="routed"
-    )
-
-    tickets_db[ticket_id] = ticket_response
-
-    return ticket_response
