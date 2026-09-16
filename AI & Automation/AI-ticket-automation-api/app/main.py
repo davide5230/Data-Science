@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from typing import Literal
 from uuid import uuid4
@@ -21,6 +21,8 @@ CATEGORY_ROUTES = {
     "shipping": "logistics_team",
     "general": "customer_support"
 }
+
+tickets_db = {}
 
 def classify_ticket(subject, message):
     text = f"{subject} {message}".lower()
@@ -184,28 +186,33 @@ print(analysis.category)
 print(analysis.priority)
 print(analysis.summary)
 
-@app.get("/")
-def root():
-    return {
-        "status": "online",
-        "service": "AI Support Ticket Automation API"
-    }
+@app.get(
+    "/tickets/{ticket_id}",
+    response_model=TicketResponse
+)
+def get_ticket(ticket_id: str):
+    ticket = tickets_db.get(ticket_id)
+
+    if ticket is None:
+        raise HTTPException(
+            status_code=404,
+            detail="Ticket not found"
+        )
+
+    return ticket
 
 
 @app.post("/tickets", response_model=TicketResponse)
 def create_ticket(ticket: TicketInput):
-
     analysis = analyze_ticket(ticket)
 
     route_to = CATEGORY_ROUTES[
         analysis.category
     ]
 
-    ticket_id = (
-        f"TKT-{uuid4().hex[:8].upper()}"
-    )
+    ticket_id = f"TKT-{uuid4().hex[:8].upper()}"
 
-    return TicketResponse(
+    ticket_response = TicketResponse(
         ticket_id=ticket_id,
         customer_id=ticket.customer_id,
         subject=ticket.subject,
@@ -215,3 +222,7 @@ def create_ticket(ticket: TicketInput):
         route_to=route_to,
         status="routed"
     )
+
+    tickets_db[ticket_id] = ticket_response
+
+    return ticket_response
