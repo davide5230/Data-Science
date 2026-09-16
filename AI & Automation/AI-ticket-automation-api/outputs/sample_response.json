@@ -1,0 +1,12 @@
+{
+  "ticket_id": "TKT-18EBA976",
+  "customer_id": "CUST-3001",
+  "subject": "Order issue",
+  "message": "My package arrived but the invoice contains a charge I do not recognize.",
+  "category": "billing",
+  "priority": "high",
+  "summary": "The customer received their package but reports an unrecognized charge on the accompanying invoice.",
+  "route_to": "billing_team",
+  "analysis_source": "llm",
+  "status": "routed"
+}
