@@ -123,10 +123,16 @@ Classify it into exactly one category:
 
 Assign exactly one priority:
 
-- low: informational or minor request with no significant impact
-- medium: normal support issue affecting the customer
-- high: important issue causing significant disruption or financial impact
-- critical: severe issue requiring immediate attention, such as security compromise or complete service failure
+- low: informational request, minor inconvenience or non-urgent question
+- medium: standard support issue affecting the customer, but with no major financial, operational or security impact
+- high: issue causing significant financial impact, repeated service failure, major disruption or inability to use an important service
+- critical: confirmed or strongly indicated security compromise, complete outage affecting essential service, data loss, fraud in progress, or another situation requiring immediate intervention
+
+Priority rules:
+- Do not assign high priority only because the customer cannot log in.
+- Do not assign high priority only because money is mentioned.
+- Use critical only when there is clear evidence of immediate severe impact.
+- When severity is uncertain, prefer the lower justified priority.
 
 Write a short factual summary of the ticket.
 
