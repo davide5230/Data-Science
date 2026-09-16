@@ -1,0 +1,4 @@
+numpy
+ollama
+pydantic
+jupyter
