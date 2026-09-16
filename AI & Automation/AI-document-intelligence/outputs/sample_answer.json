@@ -1,0 +1,12 @@
+{
+  "question": "How many days per week may eligible employees work remotely?",
+  "answer": "Example output generated from the synthetic sample document.",
+  "answerable": true,
+  "retrieved_sources": [
+    {
+      "source": "sample.txt",
+      "chunk_id": 0,
+      "score": 0.0
+    }
+  ]
+}
