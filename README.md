@@ -1,41 +1,74 @@
 # Data, AI & Automation Portfolio
 
-A portfolio of practical projects across Data Analysis, Machine Learning, Business Analytics, AI and Automation. The projects evolve from exploratory analysis and predictive modeling toward AI-powered systems that combine deterministic data processing with intelligent interpretation and workflow automation.
+A portfolio of practical projects across **Data Analysis, Machine Learning, Business Analytics, AI and Automation**. The work progresses from exploratory analysis and predictive modeling toward AI-powered systems that combine deterministic data processing, LLMs, APIs, retrieval and workflow automation.
 
 ---
 
 ## About Me
+
 🎓 Background in Computer & Automation Engineering, Data Science and business/legal studies.
 
 💻 Focused on building practical solutions using Python, Data Analytics, Machine Learning, AI and Automation.
 
-🤖 Currently exploring how LLMs, structured data and automation workflows can be combined to solve real business problems.
+🤖 Building systems that combine LLMs, structured data, retrieval, APIs and automation workflows to solve real business problems.
 
 💼 Professional experience in the Italian Guardia di Finanza since 2019, developing analytical thinking, responsibility and problem-solving in complex environments.
 
 ---
 
-## Projects Overview
+## Featured AI & Automation Projects
 
-| Project | Description | Skills & Tools |
-|---------|-------------|----------------|
-| [AI & Automation](https://github.com/davide5230/Data-Science/tree/main/AI%20%26%20Automation) | Develop AI-powered applications and automation workflows for data processing, analysis, and task optimization, integrating APIs and intelligent models into practical solutions. | Python, APIs, LLMs, Automation, Jupyter |
-| [Data](https://github.com/davide5230/Data-Science/tree/main/Data) | Analyze datasets and build data-driven dashboards using Python and R, combining statistical analysis, visualization, and interactive reporting to uncover insights and communicate results effectively. | Python, R, Pandas, NumPy, Matplotlib, Dashboarding |
-| [ML Projects](https://github.com/davide5230/Data-Science/tree/main/ML%20Projects) | Develop and train machine learning models for prediction and classification tasks, evaluating performance with metrics and visualizations. | Python, Scikit-learn, Pandas, NumPy, Jupyter |
+### [AI Business Data Analyst](https://github.com/davide5230/Data-Science/tree/main/AI%20%26%20Automation/AI-business-data-analyst)
+Deterministic business analytics pipeline that calculates KPIs, trends and anomalies with Python, then uses an LLM for structured management interpretation.
+
+**Tech:** Python · Pandas · NumPy · Pydantic · Ollama · Jupyter
+
+### [AI Document Intelligence](https://github.com/davide5230/Data-Science/tree/main/AI%20%26%20Automation/AI-document-intelligence)
+Lightweight RAG pipeline with document chunking, embeddings, cosine-similarity retrieval, grounded generation, answerability checks and structured source metadata.
+
+**Tech:** Python · NumPy · Embeddings · RAG · Ollama · Pydantic · Jupyter
+
+### [AI Support Ticket Automation API](https://github.com/davide5230/Data-Science/tree/main/AI%20%26%20Automation/AI-ticket-automation-api)
+FastAPI backend that classifies support tickets with an LLM, applies deterministic routing, uses a rule-based fallback when AI is unavailable and persists tickets with SQLite.
+
+**Tech:** Python · FastAPI · REST APIs · Pydantic · Ollama · SQLite
+
+---
+
+## Portfolio Areas
+
+| Area | Description | Skills & Tools |
+|------|-------------|----------------|
+| [AI & Automation](https://github.com/davide5230/Data-Science/tree/main/AI%20%26%20Automation) | AI-powered applications and automation workflows for analysis, retrieval, APIs and operational tasks. | Python, LLMs, RAG, FastAPI, APIs, Pydantic, Automation |
+| [Data](https://github.com/davide5230/Data-Science/tree/main/Data) | Dataset analysis and data-driven dashboards using Python and R to uncover and communicate insights. | Python, R, Pandas, NumPy, Matplotlib, Dashboarding |
+| [ML Projects](https://github.com/davide5230/Data-Science/tree/main/ML%20Projects) | Predictive and classification projects with model evaluation, preprocessing and NLP workflows. | Python, Scikit-learn, Pandas, NumPy, Jupyter |
 
 ---
 
 ## Technical Skills
-- **Languages:** Python · SQL · R 
-- **Data:** Pandas · NumPy · Excel · Data Analysis · EDA 
-- **Machine Learning:** Scikit-learn · Classification · Regression · NLP
-- **AI & Automation:** LLMs · AI Models · Pydantic · APIs · Structured Outputs
-- **Development:** Git · GitHub · Jupyter · Flask · Dash
+
+- **Languages:** Python · SQL · R
+- **Data & Analytics:** Pandas · NumPy · Excel · Data Analysis · EDA
+- **Machine Learning:** Scikit-learn · Classification · Regression · NLP · TensorFlow
+- **AI & Automation:** LLMs · RAG · Embeddings · Structured Outputs · Pydantic · Ollama
+- **APIs & Development:** FastAPI · REST APIs · SQLite · Git · GitHub · Jupyter
+- **Dashboarding:** Dash · Python visualization workflows
+
+---
+
+## Current Direction
+
+The portfolio is evolving toward systems that connect:
+
+**Data → Analysis → AI → Automation → Business Value**
+
+Current priorities include external API integrations, production-oriented automation, deployment, testing and stronger SQL/dashboard projects.
 
 ---
 
 ## Contact
-- LinkedIn: https://www.linkedin.com/in/davidebotti98/ 
+
+- LinkedIn: https://www.linkedin.com/in/davidebotti98/
 - Email: davide5230@gmail.com
 
-Feel free to explore my projects and reach out for collaboration or feedback!
+Feel free to explore the projects and reach out for collaboration or feedback.
