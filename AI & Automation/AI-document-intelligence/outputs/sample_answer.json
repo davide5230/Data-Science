@@ -1,0 +1,22 @@
+{
+  "question": "How many days per week may eligible employees work remotely?",
+  "answer": "Eligible employees may work remotely for up to three days per week, unless otherwise approved by the employee's manager and Human Resources.",
+  "answerable": true,
+  "retrieved_sources": [
+    {
+      "source": "sample.txt",
+      "chunk_id": 1,
+      "score": 0.8565
+    },
+    {
+      "source": "sample.txt",
+      "chunk_id": 2,
+      "score": 0.7315
+    },
+    {
+      "source": "sample.txt",
+      "chunk_id": 0,
+      "score": 0.7008
+    }
+  ]
+}
