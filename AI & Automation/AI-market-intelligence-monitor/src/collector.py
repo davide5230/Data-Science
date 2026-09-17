@@ -59,10 +59,17 @@ if __name__ == "__main__":
         []
     )
 
-    articles = process_articles(
-        raw_articles,
-        language="en"
-    )
+articles = process_articles(
+    raw_articles,
+    language="en",
+    keywords=[
+        "artificial intelligence",
+        "AI",
+        "machine learning",
+        "generative AI",
+        "LLM"
+    ]
+)
 
     print(
         f"Raw articles: {len(raw_articles)}"
