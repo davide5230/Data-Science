@@ -46,4 +46,12 @@ def fetch_articles(
     raise RuntimeError(
         "GDELT API rate limit exceeded after retries."
     )
+
+if __name__ == "__main__":
+    data = fetch_articles(
+        query="artificial intelligence",
+        max_records=10,
+        timespan="24h"
+    )
+
     print(data)
