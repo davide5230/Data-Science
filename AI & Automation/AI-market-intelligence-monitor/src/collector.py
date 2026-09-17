@@ -1,7 +1,6 @@
 import requests
 
-from processor import normalize_articles
-
+from processor import process_articles
 
 NEWS_API_URL = "https://freenewsapi.ai/v1/search"
 
@@ -52,16 +51,26 @@ def fetch_articles(
 if __name__ == "__main__":
     data = fetch_articles(
         query="artificial intelligence",
-        size=10
+        size=20
     )
 
-    raw_articles = data.get("results", [])
+    raw_articles = data.get(
+        "results",
+        []
+    )
 
-    articles = normalize_articles(raw_articles)
+    articles = process_articles(
+        raw_articles,
+        language="en"
+    )
 
-    for article in articles:
-        print("\n---")
-        print(article)    articles = normalize_articles(raw_articles)
+    print(
+        f"Raw articles: {len(raw_articles)}"
+    )
+
+    print(
+        f"Processed articles: {len(articles)}"
+    )
 
     for article in articles:
         print("\n---")
