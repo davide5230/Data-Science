@@ -38,6 +38,36 @@ def filter_articles(
 
     return filtered_articles
 
+def filter_by_relevance(
+    articles,
+    keywords
+):
+    relevant_articles = []
+
+    normalized_keywords = [
+        keyword.lower()
+        for keyword in keywords
+    ]
+
+    for article in articles:
+        title = (
+            article["title"] or ""
+        ).lower()
+
+        description = (
+            article["description"] or ""
+        ).lower()
+
+        text = f"{title} {description}"
+
+        if any(
+            keyword in text
+            for keyword in normalized_keywords
+        ):
+            relevant_articles.append(article)
+
+    return relevant_articles
+
 
 def deduplicate_articles(articles):
     unique_articles = []
@@ -63,7 +93,8 @@ def deduplicate_articles(articles):
 
 def process_articles(
     raw_articles,
-    language="en"
+    language="en",
+    keywords=None
 ):
     articles = normalize_articles(
         raw_articles
@@ -77,5 +108,11 @@ def process_articles(
     articles = deduplicate_articles(
         articles
     )
+
+    if keywords:
+        articles = filter_by_relevance(
+            articles,
+            keywords=keywords
+        )
 
     return articles
