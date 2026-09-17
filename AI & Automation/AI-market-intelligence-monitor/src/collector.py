@@ -1,5 +1,5 @@
 import requests
-
+from processor import normalize_articles
 
 NEWS_API_URL = "https://freenewsapi.ai/v1/search"
 
@@ -32,4 +32,10 @@ if __name__ == "__main__":
         size=10
     )
 
-    print(data)
+    raw_articles = data.get("results", [])
+
+    articles = normalize_articles(raw_articles)
+
+    for article in articles:
+        print("\n---")
+        print(article)
