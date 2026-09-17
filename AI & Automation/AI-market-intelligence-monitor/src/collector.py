@@ -71,14 +71,14 @@ articles = process_articles(
     ]
 )
 
-    print(
-        f"Raw articles: {len(raw_articles)}"
+print(
+    f"Raw articles: {len(raw_articles)}"
     )
 
-    print(
-        f"Processed articles: {len(articles)}"
+print(
+    f"Processed articles: {len(articles)}"
     )
 
-    for article in articles:
-        print("\n---")
-        print(article)
+for article in articles:
+    print("\n---")
+    print(article)
