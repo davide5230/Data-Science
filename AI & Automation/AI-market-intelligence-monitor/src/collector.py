@@ -49,36 +49,26 @@ def fetch_articles(
 
 
 if __name__ == "__main__":
-    data = fetch_articles(
-        query="artificial intelligence",
-        size=20
+
+    test_article = {
+        "article_id": "test-001",
+
+        "title":
+            "Nvidia CEO sees new AI compute demand "
+            "from data centers testing frontier models",
+
+        "description":
+            "The rising AI compute demand from data centers "
+            "could significantly boost AI infrastructure "
+            "investments, impacting tech giants' growth trajectories."
+    }
+
+    analysis = analyze_article(
+        test_article
     )
 
-    raw_articles = data.get(
-        "results",
-        []
+    print(
+        analysis.model_dump_json(
+            indent=2
+        )
     )
-
-articles = process_articles(
-    raw_articles,
-    language="en",
-    keywords=[
-        "artificial intelligence",
-        "AI",
-        "machine learning",
-        "generative AI",
-        "LLM"
-    ]
-)
-
-print(
-    f"Raw articles: {len(raw_articles)}"
-)
-
-print(
-    f"Processed articles: {len(articles)}"
-    )
-
-for article in articles:
-    print("\n---")
-    print(article)
