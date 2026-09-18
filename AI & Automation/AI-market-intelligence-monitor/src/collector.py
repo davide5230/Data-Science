@@ -73,7 +73,7 @@ articles = process_articles(
 
 print(
     f"Raw articles: {len(raw_articles)}"
-    )
+)
 
 print(
     f"Processed articles: {len(articles)}"
