@@ -33,3 +33,31 @@ def run_pipeline(
     )
 
     return analyses
+
+if __name__ == "__main__":
+
+    keywords = [
+        "artificial intelligence",
+        "AI",
+        "machine learning",
+        "generative AI",
+        "LLM"
+    ]
+
+    analyses = run_pipeline(
+        query="artificial intelligence",
+        keywords=keywords,
+        size=20
+    )
+
+    print(
+        f"\nAnalyses generated: {len(analyses)}"
+    )
+
+    for analysis in analyses:
+        print("\n---")
+        print(
+            analysis.model_dump_json(
+                indent=2
+            )
+        )
