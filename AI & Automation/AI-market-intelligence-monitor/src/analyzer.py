@@ -72,27 +72,11 @@ industries, large companies, regulation or AI adoption.
 
     return analysis
 
-if __name__ == "__main__":
+def analyze_articles(articles):
+    analyses = []
 
-    test_article = {
-        "article_id": "test-001",
+    for article in articles:
+        analysis = analyze_article(article)
+        analyses.append(analysis)
 
-        "title":
-            "Nvidia CEO sees new AI compute demand "
-            "from data centers testing frontier models",
-
-        "description":
-            "The rising AI compute demand from data centers "
-            "could significantly boost AI infrastructure "
-            "investments, impacting tech giants' growth trajectories."
-    }
-
-    analysis = analyze_article(
-        test_article
-    )
-
-    print(
-        analysis.model_dump_json(
-            indent=2
-        )
-    )
+    return analyses
