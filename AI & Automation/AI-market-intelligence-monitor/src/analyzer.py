@@ -71,3 +71,28 @@ industries, large companies, regulation or AI adoption.
     )
 
     return analysis
+
+if __name__ == "__main__":
+
+    test_article = {
+        "article_id": "test-001",
+
+        "title":
+            "Nvidia CEO sees new AI compute demand "
+            "from data centers testing frontier models",
+
+        "description":
+            "The rising AI compute demand from data centers "
+            "could significantly boost AI infrastructure "
+            "investments, impacting tech giants' growth trajectories."
+    }
+
+    analysis = analyze_article(
+        test_article
+    )
+
+    print(
+        analysis.model_dump_json(
+            indent=2
+        )
+    )
