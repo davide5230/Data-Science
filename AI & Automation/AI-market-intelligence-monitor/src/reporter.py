@@ -69,3 +69,39 @@ Be concise and business-oriented.
 """
 
     return prompt
+
+def generate_market_report(analyses):
+
+    if not analyses:
+        raise ValueError(
+            "Cannot generate report without analyses."
+        )
+
+    prompt = build_report_prompt(
+        analyses
+    )
+
+    response = chat(
+        model=MODEL_NAME,
+        messages=[
+            {
+                "role": "user",
+                "content": prompt
+            }
+        ],
+        format=MarketIntelligenceReport.model_json_schema(),
+        options={
+            "temperature": 0
+        }
+    )
+
+    content = response.message.content
+
+    if not content or not content.strip():
+        raise ValueError(
+            "LLM returned an empty market report."
+        )
+
+    return MarketIntelligenceReport.model_validate_json(
+        content
+    )
