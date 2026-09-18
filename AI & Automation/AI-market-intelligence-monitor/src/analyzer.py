@@ -66,31 +66,52 @@ industries, large companies, regulation or AI adoption.
         }
     )
 
-    analysis = ArticleAnalysis.model_validate_json(
-        response.message.content
+    content = response.message.content
+
+    if not content or not content.strip():
+        raise ValueError(
+            f"Empty LLM response for article {article['article_id']}"
+        )
+
+    return ArticleAnalysis.model_validate_json(
+        content
     )
 
-    return analysis
-
-def analyze_articles(articles):
+def analyze_articles(
+    articles,
+    max_retries=1
+):
     analyses = []
 
     for article in articles:
-        try:
-            analysis = analyze_article(
-                article
-            )
 
-            analyses.append(
-                analysis
-            )
+        for attempt in range(
+            max_retries + 1
+        ):
+            try:
+                analysis = analyze_article(
+                    article
+                )
 
-        except Exception as error:
-            print(
-                f"Failed to analyze article "
-                f"{article['article_id']}: {error}"
-            )
+                analyses.append(
+                    analysis
+                )
 
-    return analyses
+                break
+
+            except Exception as error:
+
+                if attempt < max_retries:
+                    print(
+                        f"Retrying article "
+                        f"{article['article_id']}..."
+                    )
+
+                else:
+                    print(
+                        f"Failed to analyze article "
+                        f"{article['article_id']}: "
+                        f"{error}"
+                    )
 
     return analyses
