@@ -76,7 +76,21 @@ def analyze_articles(articles):
     analyses = []
 
     for article in articles:
-        analysis = analyze_article(article)
-        analyses.append(analysis)
+        try:
+            analysis = analyze_article(
+                article
+            )
+
+            analyses.append(
+                analysis
+            )
+
+        except Exception as error:
+            print(
+                f"Failed to analyze article "
+                f"{article['article_id']}: {error}"
+            )
+
+    return analyses
 
     return analyses
