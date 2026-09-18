@@ -1,3 +1,5 @@
+import re
+
 def normalize_article(article):
     return {
         "article_id": article.get("id"),
@@ -44,25 +46,23 @@ def filter_by_relevance(
 ):
     relevant_articles = []
 
-    normalized_keywords = [
-        keyword.lower()
+    patterns = [
+        re.compile(
+            rf"\b{re.escape(keyword)}\b",
+            re.IGNORECASE
+        )
         for keyword in keywords
     ]
 
     for article in articles:
-        title = (
-            article["title"] or ""
-        ).lower()
-
-        description = (
-            article["description"] or ""
-        ).lower()
+        title = article["title"] or ""
+        description = article["description"] or ""
 
         text = f"{title} {description}"
 
         if any(
-            keyword in text
-            for keyword in normalized_keywords
+            pattern.search(text)
+            for pattern in patterns
         ):
             relevant_articles.append(article)
 
