@@ -26,6 +26,33 @@ DESCRIPTION:
 Your goal is to determine the business and market relevance
 of this development.
 
+Category definitions:
+
+models:
+new AI models, model releases, capabilities or benchmarks.
+
+infrastructure:
+chips, data centers, compute, cloud infrastructure or hardware.
+
+business:
+funding, acquisitions, company strategy, revenue, partnerships
+or major commercial developments.
+
+regulation:
+laws, government policy, regulation or institutional governance.
+
+research:
+academic research, scientific results or research institutions.
+
+safety:
+AI safety, alignment, misuse, security or existential risk.
+
+applications:
+practical adoption or use of AI in products, services or workflows.
+
+other:
+use only when none of the above clearly applies.
+
 Rules:
 
 - Do not invent facts.
