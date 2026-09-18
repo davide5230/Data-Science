@@ -1,6 +1,7 @@
 from collector import fetch_articles
 from processor import process_articles
 from analyzer import analyze_articles
+from reporter import generate_market_report
 
 
 def run_pipeline(
@@ -9,7 +10,6 @@ def run_pipeline(
     size=20,
     language="en"
 ):
-    # Step 1: collect raw news
     data = fetch_articles(
         query=query,
         size=size
@@ -20,19 +20,21 @@ def run_pipeline(
         []
     )
 
-    # Step 2: clean and filter
     processed_articles = process_articles(
         raw_articles,
         language=language,
         keywords=keywords
     )
 
-    # Step 3: AI analysis
     analyses = analyze_articles(
         processed_articles
     )
 
-    return analyses
+    report = generate_market_report(
+        analyses
+    )
+
+    return report
 
 if __name__ == "__main__":
 
@@ -44,20 +46,14 @@ if __name__ == "__main__":
         "LLM"
     ]
 
-    analyses = run_pipeline(
+    report = run_pipeline(
         query="artificial intelligence",
         keywords=keywords,
         size=20
     )
 
     print(
-        f"\nAnalyses generated: {len(analyses)}"
-    )
-
-    for analysis in analyses:
-        print("\n---")
-        print(
-            analysis.model_dump_json(
-                indent=2
-            )
+        report.model_dump_json(
+            indent=2
         )
+    )
