@@ -100,7 +100,7 @@ response = chat(
     }
 )
 
-   content = response.message.content
+content = response.message.content
 
 if not content or not content.strip():
     raise ValueError(
