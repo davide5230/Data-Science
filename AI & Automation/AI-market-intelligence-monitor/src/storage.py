@@ -23,3 +23,37 @@ def init_database():
 
     connection.commit()
     connection.close()
+
+def save_report(
+    query,
+    statistics,
+    report
+):
+    connection = sqlite3.connect(DB_PATH)
+
+    cursor = connection.cursor()
+
+    created_at = datetime.now(
+        timezone.utc
+    ).isoformat()
+
+    cursor.execute(
+        """
+        INSERT INTO reports (
+            created_at,
+            query,
+            statistics,
+            report
+        )
+        VALUES (?, ?, ?, ?)
+        """,
+        (
+            created_at,
+            query,
+            json.dumps(statistics),
+            report.model_dump_json()
+        )
+    )
+
+    connection.commit()
+    connection.close()
