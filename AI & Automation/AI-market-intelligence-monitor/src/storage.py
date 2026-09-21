@@ -21,12 +21,22 @@ def init_database():
     cursor = connection.cursor()
 
     cursor.execute("""
-    CREATE TABLE IF NOT EXISTS seen_articles (
-        article_id TEXT PRIMARY KEY,
-        url TEXT,
-        first_seen_at TEXT NOT NULL
-    )
-""")
+        CREATE TABLE IF NOT EXISTS reports (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            created_at TEXT NOT NULL,
+            query TEXT NOT NULL,
+            statistics TEXT NOT NULL,
+            report TEXT NOT NULL
+        )
+    """)
+
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS seen_articles (
+            article_id TEXT PRIMARY KEY,
+            url TEXT,
+            first_seen_at TEXT NOT NULL
+        )
+    """)
 
     connection.commit()
     connection.close()
