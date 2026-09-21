@@ -1,7 +1,6 @@
 from ollama import chat
-
 from schemas import ArticleAnalysis
-
+import time
 
 MODEL_NAME = "qwen3.5:4b"
 
@@ -80,18 +79,19 @@ industries, large companies, regulation or AI adoption.
 """
 
     response = chat(
-        model=MODEL_NAME,
-        messages=[
-            {
-                "role": "user",
-                "content": prompt
-            }
-        ],
-        format=ArticleAnalysis.model_json_schema(),
-        options={
-            "temperature": 0
+    model=MODEL_NAME,
+    messages=[
+        {
+            "role": "user",
+            "content": prompt
         }
-    )
+    ],
+    format=ArticleAnalysis.model_json_schema(),
+    options={
+        "temperature": 0,
+        "num_predict": 1024
+    }
+)
 
     content = response.message.content
 
@@ -104,13 +104,23 @@ industries, large companies, regulation or AI adoption.
         content
     )
 
+import time
+
+
 def analyze_articles(
     articles,
-    max_retries=1
+    max_retries=2
 ):
     analyses = []
 
-    for article in articles:
+    for index, article in enumerate(
+        articles,
+        start=1
+    ):
+        print(
+            f"Analyzing article "
+            f"{index}/{len(articles)}..."
+        )
 
         for attempt in range(
             max_retries + 1
@@ -129,9 +139,19 @@ def analyze_articles(
             except Exception as error:
 
                 if attempt < max_retries:
+
+                    wait_time = 2 * (
+                        attempt + 1
+                    )
+
                     print(
                         f"Retrying article "
-                        f"{article['article_id']}..."
+                        f"{article['article_id']} "
+                        f"in {wait_time}s..."
+                    )
+
+                    time.sleep(
+                        wait_time
                     )
 
                 else:
