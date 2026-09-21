@@ -1,12 +1,16 @@
 import os
 import smtplib
-
 from email.message import EmailMessage
-
 from dotenv import load_dotenv
+from pathlib import Path
 
 
-load_dotenv()
+BASE_DIR = Path(__file__).resolve().parent.parent
+ENV_PATH = BASE_DIR / "env.txt"
+
+load_dotenv(
+    dotenv_path=ENV_PATH
+)
 
 
 def format_report_email(
