@@ -14,6 +14,7 @@ KEYWORDS = [
 ]
 
 def run_monitor():
+
     logger.info(
         "Scheduled monitor execution started."
     )
@@ -26,30 +27,34 @@ def run_monitor():
         )
 
         if result["report"] is None:
+
             logger.info(
                 "Scheduled run completed: "
                 "no new articles."
-                )
+            )
+
             print(
                 "No new articles to report."
-                )
+            )
+
             return
-            
+
         deliver_report(
             statistics=result["statistics"],
             report=result["report"]
-            )
-        
+        )
+
         logger.info(
             "Report delivered successfully."
-            )
-        
+        )
+
         print(
-            "New market intelligence report generated "
-            "and delivered."
-            )
+            "New market intelligence report "
+            "generated and delivered."
+        )
 
     except Exception as error:
+
         logger.exception(
             f"Scheduled monitor failed: {error}"
         )
