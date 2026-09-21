@@ -38,6 +38,8 @@ def save_report(
     statistics,
     report
 ):
+    print(f"Saving database to: {DB_PATH}")
+
     connection = sqlite3.connect(DB_PATH)
 
     cursor = connection.cursor()
@@ -63,6 +65,15 @@ def save_report(
             report.model_dump_json()
         )
     )
+
+    connection.commit()
+
+    print(
+        f"Rows saved: "
+        f"{cursor.execute('SELECT COUNT(*) FROM reports').fetchone()[0]}"
+    )
+
+    connection.close()
 
 def get_reports():
     connection = sqlite3.connect(DB_PATH)
