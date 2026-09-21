@@ -72,7 +72,6 @@ def save_report(
         )
     )
 
-    print("Inserted row id:", cursor.lastrowid)
 
     connection.commit()
 
@@ -80,7 +79,6 @@ def save_report(
         "SELECT COUNT(*) FROM reports"
     ).fetchone()[0]
 
-    print("Rows after commit:", count)
 
     connection.close()
 
