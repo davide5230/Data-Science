@@ -107,6 +107,9 @@ industries, large companies, regulation or AI adoption.
 import time
 
 
+import time
+
+
 def analyze_articles(
     articles,
     max_retries=2
