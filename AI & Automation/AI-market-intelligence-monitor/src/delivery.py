@@ -181,3 +181,19 @@ def send_email(
         server.send_message(
             message
         )
+
+def deliver_report(
+    statistics,
+    report
+):
+    body = format_report_email(
+        statistics,
+        report
+    )
+
+    send_email(
+        subject=(
+            "AI Market Intelligence Report"
+        ),
+        body=body
+    )
