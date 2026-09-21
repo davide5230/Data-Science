@@ -1,9 +1,18 @@
 import sqlite3
 import json
 from datetime import datetime, timezone
+from pathlib import Path
 
 
-DB_PATH = "data/market_intelligence.db"
+BASE_DIR = Path(__file__).resolve().parent.parent
+DATA_DIR = BASE_DIR / "data"
+
+DATA_DIR.mkdir(
+    parents=True,
+    exist_ok=True
+)
+
+DB_PATH = DATA_DIR / "market_intelligence.db"
 
 
 def init_database():
