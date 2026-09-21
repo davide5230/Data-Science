@@ -1,15 +1,23 @@
+from analyzer import analyze_articles
+from collector import fetch_articles
 from logger import logger
 from metrics import calculate_statistics
-from collector import fetch_articles
 from processor import process_articles
-from analyzer import analyze_articles
 from reporter import generate_market_report
 from storage import (
+    get_seen_article_ids,
     init_database,
     save_report,
-    get_seen_article_ids,
     save_seen_articles
 )
+
+
+EMPTY_STATISTICS = {
+    "total_articles": 0,
+    "importance": {},
+    "categories": {},
+    "companies": {}
+}
 
 
 def run_pipeline(
@@ -19,12 +27,12 @@ def run_pipeline(
     language="en"
 ):
     logger.info(
-        f"Pipeline started for query: {query}"
+        "Pipeline started for query: %s",
+        query
     )
 
     init_database()
 
-    # 1. Collect
     data = fetch_articles(
         query=query,
         size=size
@@ -36,10 +44,10 @@ def run_pipeline(
     )
 
     logger.info(
-        f"Collected {len(raw_articles)} raw articles."
+        "Collected %s raw articles.",
+        len(raw_articles)
     )
 
-    # 2. Process
     processed_articles = process_articles(
         raw_articles,
         language=language,
@@ -47,84 +55,77 @@ def run_pipeline(
     )
 
     logger.info(
-        f"Processed {len(processed_articles)} articles."
+        "Processed %s articles.",
+        len(processed_articles)
     )
 
-    # 3. Remove articles already seen
     seen_article_ids = get_seen_article_ids()
 
     new_articles = [
         article
         for article in processed_articles
-        if article["article_id"]
-        not in seen_article_ids
+        if article["article_id"] not in seen_article_ids
     ]
 
     logger.info(
-        f"Found {len(new_articles)} new articles."
+        "Found %s new articles.",
+        len(new_articles)
     )
 
-    # 4. Stop only if there are really no new articles
     if not new_articles:
         logger.info(
             "No new articles found."
         )
-
         return {
-            "statistics": {
-                "total_articles": 0,
-                "importance": {},
-                "categories": {},
-                "companies": {}
-            },
+            "statistics": EMPTY_STATISTICS.copy(),
             "report": None
         }
 
-    # 5. Analyze new articles
     analyses = analyze_articles(
         new_articles
     )
 
     logger.info(
-        f"Generated {len(analyses)} analyses."
+        "Generated %s analyses.",
+        len(analyses)
     )
 
-    # 6. Stop if every AI analysis failed
     if not analyses:
         logger.warning(
             "No analyses were generated."
         )
-
         return {
-            "statistics": {
-                "total_articles": 0,
-                "importance": {},
-                "categories": {},
-                "companies": {}
-            },
+            "statistics": EMPTY_STATISTICS.copy(),
             "report": None
         }
 
-    # 7. Metrics
     statistics = calculate_statistics(
         analyses
     )
 
-    # 8. Generate report
     report = generate_market_report(
         analyses
     )
 
-    # 9. Save report FIRST
     save_report(
         query=query,
         statistics=statistics,
         report=report
     )
 
-    # 10. Only now mark articles as seen
+    analyzed_article_ids = {
+        analysis.article_id
+        for analysis in analyses
+    }
+
+    successfully_analyzed_articles = [
+        article
+        for article in new_articles
+        if article["article_id"] in analyzed_article_ids
+    ]
+
     save_seen_articles(
-        new_articles
+        successfully_analyzed_articles
     )
 
     logger.info(
@@ -136,8 +137,8 @@ def run_pipeline(
         "report": report
     }
 
-if __name__ == "__main__":
 
+if __name__ == "__main__":
     keywords = [
         "artificial intelligence",
         "AI",
@@ -151,15 +152,17 @@ if __name__ == "__main__":
         keywords=keywords,
         size=20
     )
-    
+
     if result["report"] is not None:
-        print("\nMARKET INTELLIGENCE REPORT")
+        print(
+            "\nMARKET INTELLIGENCE REPORT"
+        )
         print(
             result["report"].model_dump_json(
                 indent=2
-                )
             )
+        )
     else:
         print(
             "\nNo new articles to report."
-            )
+        )
