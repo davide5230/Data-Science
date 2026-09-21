@@ -76,9 +76,16 @@ or regulatory environment.
 high:
 major development that could materially affect markets,
 industries, large companies, regulation or AI adoption.
+
+JSON SCHEMA:
+
+{ArticleAnalysis.model_json_schema()}
+
+Return only a valid JSON object matching this schema.
+Do not include explanations, markdown or additional text.
 """
 
-    response = chat(
+response = chat(
     model=MODEL_NAME,
     messages=[
         {
@@ -87,32 +94,27 @@ industries, large companies, regulation or AI adoption.
         }
     ],
     format=ArticleAnalysis.model_json_schema(),
+    think=False,
     options={
-        "temperature": 0,
-        "num_predict": 1024
+        "temperature": 0
     }
 )
 
-    content = response.message.content
+   content = response.message.content
 
-    if not content or not content.strip():
-        raise ValueError(
-            f"Empty LLM response for article {article['article_id']}"
-        )
-
-    return ArticleAnalysis.model_validate_json(
-        content
+if not content or not content.strip():
+    raise ValueError(
+        f"Empty LLM response for article {article['article_id']}"
     )
 
-import time
-
-
-import time
+return ArticleAnalysis.model_validate_json(
+    content
+)
 
 
 def analyze_articles(
     articles,
-    max_retries=2
+    max_retries=1
 ):
     analyses = []
 
