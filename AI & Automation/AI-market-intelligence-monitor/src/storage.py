@@ -1,148 +1,121 @@
-import sqlite3
 import json
+import sqlite3
 from datetime import datetime, timezone
 from pathlib import Path
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = BASE_DIR / "data"
-
-DATA_DIR.mkdir(
-    parents=True,
-    exist_ok=True
-)
+DATA_DIR.mkdir(parents=True, exist_ok=True)
 
 DB_PATH = DATA_DIR / "market_intelligence.db"
 
 
 def init_database():
-    connection = sqlite3.connect(DB_PATH)
+    with sqlite3.connect(DB_PATH) as connection:
+        cursor = connection.cursor()
 
-    cursor = connection.cursor()
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS reports (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                created_at TEXT NOT NULL,
+                query TEXT NOT NULL,
+                statistics TEXT NOT NULL,
+                report TEXT NOT NULL
+            )
+        """)
 
-    cursor.execute("""
-        CREATE TABLE IF NOT EXISTS reports (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            created_at TEXT NOT NULL,
-            query TEXT NOT NULL,
-            statistics TEXT NOT NULL,
-            report TEXT NOT NULL
-        )
-    """)
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS seen_articles (
+                article_id TEXT PRIMARY KEY,
+                url TEXT,
+                first_seen_at TEXT NOT NULL
+            )
+        """)
 
-    cursor.execute("""
-        CREATE TABLE IF NOT EXISTS seen_articles (
-            article_id TEXT PRIMARY KEY,
-            url TEXT,
-            first_seen_at TEXT NOT NULL
-        )
-    """)
-
-    connection.commit()
-    connection.close()
 
 def save_report(
     query,
     statistics,
     report
 ):
-
-    connection = sqlite3.connect(DB_PATH)
-    cursor = connection.cursor()
-
     created_at = datetime.now(
         timezone.utc
     ).isoformat()
 
-    cursor.execute(
-        """
-        INSERT INTO reports (
-            created_at,
-            query,
-            statistics,
-            report
+    with sqlite3.connect(DB_PATH) as connection:
+        connection.execute(
+            """
+            INSERT INTO reports (
+                created_at,
+                query,
+                statistics,
+                report
+            )
+            VALUES (?, ?, ?, ?)
+            """,
+            (
+                created_at,
+                query,
+                json.dumps(statistics),
+                report.model_dump_json()
+            )
         )
-        VALUES (?, ?, ?, ?)
-        """,
-        (
-            created_at,
-            query,
-            json.dumps(statistics),
-            report.model_dump_json()
-        )
-    )
 
-
-    connection.commit()
-
-    count = cursor.execute(
-        "SELECT COUNT(*) FROM reports"
-    ).fetchone()[0]
-
-
-    connection.close()
 
 def get_reports():
+    with sqlite3.connect(DB_PATH) as connection:
+        connection.row_factory = sqlite3.Row
 
-    connection = sqlite3.connect(DB_PATH)
-
-    connection.row_factory = sqlite3.Row
-
-    cursor = connection.cursor()
-
-    cursor.execute("""
-        SELECT
-            id,
-            created_at,
-            query,
-            statistics,
-            report
-        FROM reports
-        ORDER BY created_at DESC
-    """)
-
-    rows = cursor.fetchall()
-
-    connection.close()
+        rows = connection.execute("""
+            SELECT
+                id,
+                created_at,
+                query,
+                statistics,
+                report
+            FROM reports
+            ORDER BY created_at DESC
+        """).fetchall()
 
     return [
         dict(row)
         for row in rows
     ]
-    
-    connection.commit()
-    connection.close()
+
 
 def get_seen_article_ids():
-    connection = sqlite3.connect(DB_PATH)
-
-    cursor = connection.cursor()
-
-    cursor.execute("""
-        SELECT article_id
-        FROM seen_articles
-    """)
-
-    rows = cursor.fetchall()
-
-    connection.close()
+    with sqlite3.connect(DB_PATH) as connection:
+        rows = connection.execute("""
+            SELECT article_id
+            FROM seen_articles
+        """).fetchall()
 
     return {
         row[0]
         for row in rows
     }
 
-def save_seen_articles(articles):
-    connection = sqlite3.connect(DB_PATH)
 
-    cursor = connection.cursor()
+def save_seen_articles(articles):
+    if not articles:
+        return
 
     now = datetime.now(
         timezone.utc
     ).isoformat()
 
-    for article in articles:
-        cursor.execute(
+    records = [
+        (
+            article["article_id"],
+            article["url"],
+            now
+        )
+        for article in articles
+    ]
+
+    with sqlite3.connect(DB_PATH) as connection:
+        connection.executemany(
             """
             INSERT OR IGNORE INTO seen_articles (
                 article_id,
@@ -151,12 +124,5 @@ def save_seen_articles(articles):
             )
             VALUES (?, ?, ?)
             """,
-            (
-                article["article_id"],
-                article["url"],
-                now
-            )
+            records
         )
-
-    connection.commit()
-    connection.close()
