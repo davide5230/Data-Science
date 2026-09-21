@@ -1,3 +1,4 @@
+from logger import logger
 from metrics import calculate_statistics
 from collector import fetch_articles
 from processor import process_articles
@@ -15,7 +16,12 @@ def run_pipeline(
     size=20,
     language="en"
 ):
+    logger.info(
+        f"Pipeline started for query: {query}"
+    )
+
     init_database()
+
     data = fetch_articles(
         query=query,
         size=size
@@ -26,34 +32,50 @@ def run_pipeline(
         []
     )
 
+    logger.info(
+        f"Collected {len(raw_articles)} raw articles."
+    )
+
     processed_articles = process_articles(
         raw_articles,
         language=language,
         keywords=keywords
     )
-    
+
+    logger.info(
+        f"Processed {len(processed_articles)} articles."
+    )
+
     analyses = analyze_articles(
         processed_articles
-        )
-    
+    )
+
+    logger.info(
+        f"Generated {len(analyses)} analyses."
+    )
+
     statistics = calculate_statistics(
         analyses
-        )
-    
+    )
+
     report = generate_market_report(
         analyses
-        )
+    )
 
     save_report(
         query=query,
         statistics=statistics,
         report=report
-        )
-    
+    )
+
+    logger.info(
+        "Report generated and saved successfully."
+    )
+
     return {
         "statistics": statistics,
         "report": report
-        }
+    }
 
 if __name__ == "__main__":
 
