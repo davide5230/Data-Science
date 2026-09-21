@@ -41,7 +41,7 @@ def format_report_email(
     for company in report.companies_to_watch:
         lines.append(f"- {company}")
 
-    lines.append("")
+        lines.append("")
     lines.append("KEY RISKS")
 
     for risk in report.key_risks:
@@ -72,9 +72,8 @@ def format_report_email(
         f"Categories: "
         f"{statistics['categories']}"
     )
-    
+
     return "\n".join(lines)
-    lines.append(f"- {risk}")
 
     lines.append("")
     lines.append("KEY OPPORTUNITIES")
