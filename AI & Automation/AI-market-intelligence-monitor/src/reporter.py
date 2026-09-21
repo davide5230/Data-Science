@@ -1,5 +1,4 @@
 from ollama import chat
-
 from schemas import MarketIntelligenceReport
 
 
@@ -66,6 +65,13 @@ or market opportunities.
 Avoid repetition.
 
 Be concise and business-oriented.
+
+JSON SCHEMA:
+
+{MarketIntelligenceReport.model_json_schema()}
+
+Return only a valid JSON object matching this schema.
+Do not include explanations, markdown or additional text.
 """
 
     return prompt
@@ -80,7 +86,7 @@ def generate_market_report(analyses):
     prompt = build_report_prompt(
         analyses
     )
-
+    
     response = chat(
         model=MODEL_NAME,
         messages=[
@@ -88,12 +94,13 @@ def generate_market_report(analyses):
                 "role": "user",
                 "content": prompt
             }
-        ],
+            ],
         format=MarketIntelligenceReport.model_json_schema(),
+        think=False,
         options={
             "temperature": 0
-        }
-    )
+            }
+        )
 
     content = response.message.content
 
