@@ -54,11 +54,19 @@ def run_pipeline(
         ]
 
     logger.info(
+        f"Found {len(new_articles)} new articles."
+    )
+
+    logger.info(
         f"Processed {len(processed_articles)} articles."
     )
 
     analyses = analyze_articles(
-        processed_articles
+        new_articles
+    )
+
+    save_seen_articles(
+        new_articles
     )
 
     logger.info(
@@ -69,6 +77,22 @@ def run_pipeline(
         analyses
     )
 
+    if not analyses:
+        logger.info(
+            "No new articles found. "
+            "Pipeline completed without generating a report."
+            )
+
+    return {
+        "statistics": {
+            "total_articles": 0,
+            "importance": {},
+            "categories": {},
+            "companies": {}
+            },
+        "report": None
+        }
+    
     report = generate_market_report(
         analyses
     )
@@ -103,15 +127,15 @@ if __name__ == "__main__":
         keywords=keywords,
         size=20
     )
-
-    print("\nSTATISTICS")
-    print(
-        result["statistics"]
-    )
-
-    print("\nMARKET INTELLIGENCE REPORT")
-    print(
-        result["report"].model_dump_json(
-            indent=2
-        )
-    )
+    
+    if result["report"] is not None:
+        print("\nMARKET INTELLIGENCE REPORT")
+        print(
+            result["report"].model_dump_json(
+                indent=2
+                )
+            )
+    else:
+        print(
+            "\nNo new articles to report."
+            )
