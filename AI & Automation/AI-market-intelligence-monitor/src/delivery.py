@@ -197,3 +197,17 @@ def deliver_report(
         ),
         body=body
     )
+
+if __name__ == "__main__":
+
+    send_email(
+        subject="AI Monitor Test",
+        body=(
+            "Test email from "
+            "AI Market Intelligence Monitor."
+        )
+    )
+
+    print(
+        "Test email sent."
+    )
