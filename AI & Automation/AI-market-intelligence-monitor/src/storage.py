@@ -102,6 +102,19 @@ def get_reports():
         for row in rows
     ]
 
+    if __name__ == "__main__":
+    reports = get_reports()
+
+    print(
+        f"Stored reports: {len(reports)}"
+    )
+
+    for report in reports:
+        print(
+            report["id"],
+            report["created_at"],
+            report["query"]
+        )
     
 
     connection.commit()
