@@ -1,4 +1,5 @@
 from ollama import chat
+
 from schemas import MarketIntelligenceReport
 
 
@@ -6,19 +7,12 @@ MODEL_NAME = "qwen3.5:4b"
 
 
 def build_report_prompt(analyses):
-
-    analyses_text = []
-
-    for analysis in analyses:
-        analyses_text.append(
-            analysis.model_dump_json()
-        )
-
     joined_analyses = "\n".join(
-        analyses_text
+        analysis.model_dump_json()
+        for analysis in analyses
     )
 
-    prompt = f"""
+    return f"""
 You are a senior market intelligence analyst.
 
 You are given a collection of structured analyses
@@ -63,7 +57,6 @@ Aggregate the strongest potential business
 or market opportunities.
 
 Avoid repetition.
-
 Be concise and business-oriented.
 
 JSON SCHEMA:
@@ -74,10 +67,8 @@ Return only a valid JSON object matching this schema.
 Do not include explanations, markdown or additional text.
 """
 
-    return prompt
 
 def generate_market_report(analyses):
-
     if not analyses:
         raise ValueError(
             "Cannot generate report without analyses."
@@ -86,7 +77,7 @@ def generate_market_report(analyses):
     prompt = build_report_prompt(
         analyses
     )
-    
+
     response = chat(
         model=MODEL_NAME,
         messages=[
@@ -94,13 +85,13 @@ def generate_market_report(analyses):
                 "role": "user",
                 "content": prompt
             }
-            ],
+        ],
         format=MarketIntelligenceReport.model_json_schema(),
         think=False,
         options={
             "temperature": 0
-            }
-        )
+        }
+    )
 
     content = response.message.content
 
