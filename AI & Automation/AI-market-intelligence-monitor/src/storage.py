@@ -101,7 +101,9 @@ def get_reports():
         dict(row)
         for row in rows
     ]
-
+    
+    connection.commit()
+    connection.close()
 if __name__ == "__main__":
     reports = get_reports()
     print(
@@ -114,7 +116,3 @@ if __name__ == "__main__":
             report["created_at"],
             report["query"]
         )
-    
-
-    connection.commit()
-    connection.close()
