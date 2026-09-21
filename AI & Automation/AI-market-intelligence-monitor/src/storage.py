@@ -103,11 +103,10 @@ def get_reports():
     ]
 
     if __name__ == "__main__":
-    reports = get_reports()
-
-    print(
-        f"Stored reports: {len(reports)}"
-    )
+        reports = get_reports()
+        print(
+            f"Stored reports: {len(reports)}"
+            )
 
     for report in reports:
         print(
