@@ -54,14 +54,20 @@ if __name__ == "__main__":
         "LLM"
     ]
 
-    report = run_pipeline(
+    result = run_pipeline(
         query="artificial intelligence",
         keywords=keywords,
         size=20
-    )
-
-    print(
-        report.model_dump_json(
-            indent=2
         )
-    )
+    
+    print("\nSTATISTICS")
+    print(
+        result["statistics"]
+        )
+    
+    print("\nMARKET INTELLIGENCE REPORT")
+    print(
+        result["report"].model_dump_json(
+            indent=2
+            )
+        )
