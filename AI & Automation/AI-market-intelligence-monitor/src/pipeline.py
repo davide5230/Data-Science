@@ -1,3 +1,4 @@
+from metrics import calculate_statistics
 from collector import fetch_articles
 from processor import process_articles
 from analyzer import analyze_articles
@@ -25,16 +26,23 @@ def run_pipeline(
         language=language,
         keywords=keywords
     )
-
+    
     analyses = analyze_articles(
         processed_articles
-    )
-
+        )
+    
+    statistics = calculate_statistics(
+        analyses
+        )
+    
     report = generate_market_report(
         analyses
-    )
-
-    return report
+        )
+    
+    return {
+        "statistics": statistics,
+        "report": report
+        }
 
 if __name__ == "__main__":
 
