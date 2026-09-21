@@ -10,12 +10,12 @@ from storage import (
 
 
 def run_pipeline(
-    init_database()
     query,
     keywords,
     size=20,
     language="en"
 ):
+    init_database()
     data = fetch_articles(
         query=query,
         size=size
