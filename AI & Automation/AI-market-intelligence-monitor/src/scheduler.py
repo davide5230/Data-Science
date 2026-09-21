@@ -2,6 +2,7 @@ import time
 import schedule
 from logger import logger
 from pipeline import run_pipeline
+from delivery import deliver_report
 
 
 KEYWORDS = [
@@ -28,21 +29,25 @@ def run_monitor():
             logger.info(
                 "Scheduled run completed: "
                 "no new articles."
-            )
-
+                )
             print(
                 "No new articles to report."
-            )
-
+                )
             return
-
+            
+        deliver_report(
+            statistics=result["statistics"],
+            report=result["report"]
+            )
+        
         logger.info(
-            "Scheduled run completed successfully."
-        )
-
+            "Report delivered successfully."
+            )
+        
         print(
-            "New market intelligence report generated."
-        )
+            "New market intelligence report generated "
+            "and delivered."
+            )
 
     except Exception as error:
         logger.exception(
