@@ -14,6 +14,9 @@ DATA_DIR.mkdir(
 
 DB_PATH = DATA_DIR / "market_intelligence.db"
 
+print("STORAGE FILE:", __file__)
+print("DATABASE PATH:", DB_PATH)
+
 
 def init_database():
     connection = sqlite3.connect(DB_PATH)
@@ -38,10 +41,11 @@ def save_report(
     statistics,
     report
 ):
-    print(f"Saving database to: {DB_PATH}")
+    print("\n--- SAVE REPORT DEBUG ---")
+    print("Storage module:", __file__)
+    print("Database:", DB_PATH)
 
     connection = sqlite3.connect(DB_PATH)
-
     cursor = connection.cursor()
 
     created_at = datetime.now(
@@ -66,16 +70,24 @@ def save_report(
         )
     )
 
+    print("Inserted row id:", cursor.lastrowid)
+
     connection.commit()
 
-    print(
-        f"Rows saved: "
-        f"{cursor.execute('SELECT COUNT(*) FROM reports').fetchone()[0]}"
-    )
+    count = cursor.execute(
+        "SELECT COUNT(*) FROM reports"
+    ).fetchone()[0]
+
+    print("Rows after commit:", count)
 
     connection.close()
 
 def get_reports():
+
+    print("\n--- GET REPORTS DEBUG ---")
+    print("Storage module:", __file__)
+    print("Database:", DB_PATH)
+
     connection = sqlite3.connect(DB_PATH)
 
     connection.row_factory = sqlite3.Row
