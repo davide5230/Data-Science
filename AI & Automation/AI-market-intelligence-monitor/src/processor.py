@@ -1,5 +1,6 @@
 import re
 
+
 def normalize_article(article):
     return {
         "article_id": article.get("id"),
@@ -26,11 +27,16 @@ def filter_articles(
     filtered_articles = []
 
     for article in articles:
+        if not article["article_id"]:
+            continue
 
         if not article["title"]:
             continue
 
         if not article["description"]:
+            continue
+
+        if not article["url"]:
             continue
 
         if article["language"] != language:
@@ -40,12 +46,11 @@ def filter_articles(
 
     return filtered_articles
 
+
 def filter_by_relevance(
     articles,
     keywords
 ):
-    relevant_articles = []
-
     patterns = [
         re.compile(
             rf"\b{re.escape(keyword)}\b",
@@ -54,10 +59,11 @@ def filter_by_relevance(
         for keyword in keywords
     ]
 
+    relevant_articles = []
+
     for article in articles:
         title = article["title"] or ""
         description = article["description"] or ""
-
         text = f"{title} {description}"
 
         if any(
@@ -71,21 +77,15 @@ def filter_by_relevance(
 
 def deduplicate_articles(articles):
     unique_articles = []
-
     seen_urls = set()
 
     for article in articles:
-
         url = article["url"]
-
-        if not url:
-            continue
 
         if url in seen_urls:
             continue
 
         seen_urls.add(url)
-
         unique_articles.append(article)
 
     return unique_articles
