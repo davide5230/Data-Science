@@ -1,8 +1,10 @@
 import time
+
 import schedule
+
+from delivery import deliver_report
 from logger import logger
 from pipeline import run_pipeline
-from delivery import deliver_report
 
 
 KEYWORDS = [
@@ -13,8 +15,10 @@ KEYWORDS = [
     "LLM"
 ]
 
-def run_monitor():
+SCHEDULE_TIME = "08:00"
 
+
+def run_monitor():
     logger.info(
         "Scheduled monitor execution started."
     )
@@ -27,16 +31,12 @@ def run_monitor():
         )
 
         if result["report"] is None:
-
             logger.info(
-                "Scheduled run completed: "
-                "no new articles."
+                "Scheduled run completed: no new articles."
             )
-
             print(
                 "No new articles to report."
             )
-
             return
 
         deliver_report(
@@ -54,22 +54,24 @@ def run_monitor():
         )
 
     except Exception as error:
-
         logger.exception(
-            f"Scheduled monitor failed: {error}"
+            "Scheduled monitor failed: %s",
+            error
         )
-
         print(
             f"Monitor execution failed: {error}"
         )
 
 
-schedule.every().day.at("08:00"
-                       ).do(run_monitor)
+schedule.every().day.at(
+    SCHEDULE_TIME
+).do(run_monitor)
+
 
 if __name__ == "__main__":
     print(
-        "Market Intelligence Monitor started."
+        f"Market Intelligence Monitor started. "
+        f"Scheduled daily at {SCHEDULE_TIME}."
     )
 
     while True:
