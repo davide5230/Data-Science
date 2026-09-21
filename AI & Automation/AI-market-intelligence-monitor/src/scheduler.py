@@ -54,14 +54,9 @@ def run_monitor():
         )
 
 
-# schedule.every().day.at(
- #   "08:00"
-#).do(run_monitor)
-
-schedule.every(1).minutes.do(
-    run_monitor
-)
-
+ schedule.every().day.at(
+    "08:00"
+).do(run_monitor)
 
 if __name__ == "__main__":
     print(
