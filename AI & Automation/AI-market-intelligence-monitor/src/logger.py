@@ -4,11 +4,7 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 LOG_DIR = BASE_DIR / "logs"
-
-LOG_DIR.mkdir(
-    parents=True,
-    exist_ok=True
-)
+LOG_DIR.mkdir(parents=True, exist_ok=True)
 
 LOG_PATH = LOG_DIR / "market_monitor.log"
 
@@ -23,6 +19,10 @@ logging.basicConfig(
     )
 )
 
+# Keep third-party HTTP client logs from overwhelming the application log.
+logging.getLogger("httpx").setLevel(
+    logging.WARNING
+)
 
 logger = logging.getLogger(
     "market_monitor"
