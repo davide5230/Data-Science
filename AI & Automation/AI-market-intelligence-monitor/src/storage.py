@@ -14,9 +14,6 @@ DATA_DIR.mkdir(
 
 DB_PATH = DATA_DIR / "market_intelligence.db"
 
-print("STORAGE FILE:", __file__)
-print("DATABASE PATH:", DB_PATH)
-
 
 def init_database():
     connection = sqlite3.connect(DB_PATH)
@@ -41,9 +38,6 @@ def save_report(
     statistics,
     report
 ):
-    print("\n--- SAVE REPORT DEBUG ---")
-    print("Storage module:", __file__)
-    print("Database:", DB_PATH)
 
     connection = sqlite3.connect(DB_PATH)
     cursor = connection.cursor()
@@ -84,10 +78,6 @@ def save_report(
 
 def get_reports():
 
-    print("\n--- GET REPORTS DEBUG ---")
-    print("Storage module:", __file__)
-    print("Database:", DB_PATH)
-
     connection = sqlite3.connect(DB_PATH)
 
     connection.row_factory = sqlite3.Row
@@ -116,15 +106,3 @@ def get_reports():
     
     connection.commit()
     connection.close()
-if __name__ == "__main__":
-    reports = get_reports()
-    print(
-        f"Stored reports: {len(reports)}"
-        )
-
-    for report in reports:
-        print(
-            report["id"],
-            report["created_at"],
-            report["query"]
-        )
