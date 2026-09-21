@@ -58,16 +58,16 @@ if __name__ == "__main__":
         query="artificial intelligence",
         keywords=keywords,
         size=20
-        )
-    
+    )
+
     print("\nSTATISTICS")
     print(
         result["statistics"]
-        )
-    
+    )
+
     print("\nMARKET INTELLIGENCE REPORT")
     print(
         result["report"].model_dump_json(
             indent=2
-            )
         )
+    )
