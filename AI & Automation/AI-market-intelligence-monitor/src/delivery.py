@@ -72,8 +72,9 @@ def format_report_email(
         f"Categories: "
         f"{statistics['categories']}"
     )
-
-    return "\n".join(lines)        lines.append(f"- {risk}")
+    
+    return "\n".join(lines)
+    lines.append(f"- {risk}")
 
     lines.append("")
     lines.append("KEY OPPORTUNITIES")
