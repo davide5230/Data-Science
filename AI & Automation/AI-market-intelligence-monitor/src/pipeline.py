@@ -6,7 +6,9 @@ from analyzer import analyze_articles
 from reporter import generate_market_report
 from storage import (
     init_database,
-    save_report
+    save_report,
+    get_seen_article_ids,
+    save_seen_articles
 )
 
 
@@ -41,6 +43,15 @@ def run_pipeline(
         language=language,
         keywords=keywords
     )
+
+    seen_article_ids = get_seen_article_ids()
+    
+    new_articles = [
+        article
+        for article in processed_articles
+        if article["article_id"]
+        not in seen_article_ids
+        ]
 
     logger.info(
         f"Processed {len(processed_articles)} articles."
