@@ -55,5 +55,34 @@ def save_report(
         )
     )
 
+def get_reports():
+    connection = sqlite3.connect(DB_PATH)
+
+    connection.row_factory = sqlite3.Row
+
+    cursor = connection.cursor()
+
+    cursor.execute("""
+        SELECT
+            id,
+            created_at,
+            query,
+            statistics,
+            report
+        FROM reports
+        ORDER BY created_at DESC
+    """)
+
+    rows = cursor.fetchall()
+
+    connection.close()
+
+    return [
+        dict(row)
+        for row in rows
+    ]
+
+    
+
     connection.commit()
     connection.close()
