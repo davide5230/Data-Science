@@ -3,9 +3,14 @@ from collector import fetch_articles
 from processor import process_articles
 from analyzer import analyze_articles
 from reporter import generate_market_report
+from storage import (
+    init_database,
+    save_report
+)
 
 
 def run_pipeline(
+    init_database()
     query,
     keywords,
     size=20,
@@ -37,6 +42,12 @@ def run_pipeline(
     
     report = generate_market_report(
         analyses
+        )
+
+    save_report(
+        query=query,
+        statistics=statistics,
+        report=report
         )
     
     return {
