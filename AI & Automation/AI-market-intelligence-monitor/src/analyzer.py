@@ -84,33 +84,29 @@ JSON SCHEMA:
 Return only a valid JSON object matching this schema.
 Do not include explanations, markdown or additional text.
 """
-
-response = chat(
-    model=MODEL_NAME,
-    messages=[
-        {
-            "role": "user",
-            "content": prompt
-        }
-    ],
-    format=ArticleAnalysis.model_json_schema(),
-    think=False,
-    options={
-        "temperature": 0
-    }
-)
-
-content = response.message.content
-
-if not content or not content.strip():
-    raise ValueError(
-        f"Empty LLM response for article {article['article_id']}"
-    )
-
-return ArticleAnalysis.model_validate_json(
-    content
-)
-
+    response = chat(
+        model=MODEL_NAME,
+        messages=[
+            {
+                "role": "user",
+                "content": prompt
+            }
+            ],
+        format=ArticleAnalysis.model_json_schema(),
+        think=False,
+        options={
+            "temperature": 0
+            }
+        )
+    
+    content = response.message.content
+    if not content or not content.strip():
+        raise ValueError(
+            f"Empty LLM response for article {article['article_id']}"
+            )
+    return ArticleAnalysis.model_validate_json(
+        content
+        )
 
 def analyze_articles(
     articles,
