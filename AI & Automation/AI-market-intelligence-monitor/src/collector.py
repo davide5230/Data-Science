@@ -1,6 +1,5 @@
 import requests
 
-from processor import process_articles
 
 NEWS_API_URL = "https://freenewsapi.ai/v1/search"
 
@@ -22,53 +21,25 @@ def fetch_articles(
             params=params,
             timeout=30
         )
-
         response.raise_for_status()
-
         return response.json()
 
-    except requests.exceptions.Timeout:
+    except requests.exceptions.Timeout as error:
         raise RuntimeError(
             "News API request timed out."
-        )
+        ) from error
 
-    except requests.exceptions.ConnectionError:
+    except requests.exceptions.ConnectionError as error:
         raise RuntimeError(
             "Unable to connect to the News API."
-        )
+        ) from error
 
     except requests.exceptions.HTTPError as error:
         raise RuntimeError(
             f"News API returned an HTTP error: {error}"
-        )
+        ) from error
 
     except requests.exceptions.RequestException as error:
         raise RuntimeError(
             f"News API request failed: {error}"
-        )
-
-
-if __name__ == "__main__":
-
-    test_article = {
-        "article_id": "test-001",
-
-        "title":
-            "Nvidia CEO sees new AI compute demand "
-            "from data centers testing frontier models",
-
-        "description":
-            "The rising AI compute demand from data centers "
-            "could significantly boost AI infrastructure "
-            "investments, impacting tech giants' growth trajectories."
-    }
-
-    analysis = analyze_article(
-        test_article
-    )
-
-    print(
-        analysis.model_dump_json(
-            indent=2
-        )
-    )
+        ) from error
