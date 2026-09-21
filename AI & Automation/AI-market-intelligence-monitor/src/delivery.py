@@ -6,7 +6,7 @@ from pathlib import Path
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-ENV_PATH = BASE_DIR / "env.txt"
+ENV_PATH = BASE_DIR / ".env"
 
 load_dotenv(
     dotenv_path=ENV_PATH
@@ -182,18 +182,4 @@ def deliver_report(
             "AI Market Intelligence Report"
         ),
         body=body
-    )
-
-if __name__ == "__main__":
-
-    send_email(
-        subject="AI Monitor Test",
-        body=(
-            "Test email from "
-            "AI Market Intelligence Monitor."
-        )
-    )
-
-    print(
-        "Test email sent."
     )
