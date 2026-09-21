@@ -24,6 +24,7 @@ def run_pipeline(
 
     init_database()
 
+    # 1. Collect
     data = fetch_articles(
         query=query,
         size=size
@@ -38,34 +39,49 @@ def run_pipeline(
         f"Collected {len(raw_articles)} raw articles."
     )
 
+    # 2. Process
     processed_articles = process_articles(
         raw_articles,
         language=language,
         keywords=keywords
     )
 
+    logger.info(
+        f"Processed {len(processed_articles)} articles."
+    )
+
+    # 3. Remove articles already seen
     seen_article_ids = get_seen_article_ids()
-    
+
     new_articles = [
         article
         for article in processed_articles
         if article["article_id"]
         not in seen_article_ids
-        ]
+    ]
 
     logger.info(
         f"Found {len(new_articles)} new articles."
     )
 
-    logger.info(
-        f"Processed {len(processed_articles)} articles."
-    )
+    # 4. Stop only if there are really no new articles
+    if not new_articles:
+        logger.info(
+            "No new articles found."
+        )
 
+        return {
+            "statistics": {
+                "total_articles": 0,
+                "importance": {},
+                "categories": {},
+                "companies": {}
+            },
+            "report": None
+        }
+
+    # 5. Analyze new articles
     analyses = analyze_articles(
-        new_articles
-    )
-
-    save_seen_articles(
         new_articles
     )
 
@@ -73,34 +89,42 @@ def run_pipeline(
         f"Generated {len(analyses)} analyses."
     )
 
+    # 6. Stop if every AI analysis failed
+    if not analyses:
+        logger.warning(
+            "No analyses were generated."
+        )
+
+        return {
+            "statistics": {
+                "total_articles": 0,
+                "importance": {},
+                "categories": {},
+                "companies": {}
+            },
+            "report": None
+        }
+
+    # 7. Metrics
     statistics = calculate_statistics(
         analyses
     )
 
-    if not analyses:
-        logger.info(
-            "No new articles found. "
-            "Pipeline completed without generating a report."
-            )
-
-    return {
-        "statistics": {
-            "total_articles": 0,
-            "importance": {},
-            "categories": {},
-            "companies": {}
-            },
-        "report": None
-        }
-    
+    # 8. Generate report
     report = generate_market_report(
         analyses
     )
 
+    # 9. Save report FIRST
     save_report(
         query=query,
         statistics=statistics,
         report=report
+    )
+
+    # 10. Only now mark articles as seen
+    save_seen_articles(
+        new_articles
     )
 
     logger.info(
