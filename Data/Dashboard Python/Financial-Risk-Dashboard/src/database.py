@@ -1,9 +1,8 @@
 import os
 from pathlib import Path
-
 import pandas as pd
-import psycopg
 from dotenv import load_dotenv
+from sqlalchemy import create_engine, text
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -14,18 +13,33 @@ load_dotenv(
 )
 
 
-def get_connection():
-    return psycopg.connect(
-        dbname=os.getenv("DB_NAME"),
-        host=os.getenv("DB_HOST"),
-        port=os.getenv("DB_PORT"),
-        user=os.getenv("DB_USER"),
-        password=os.getenv("DB_PASSWORD")
+def get_engine():
+    db_name = os.getenv("DB_NAME")
+    db_host = os.getenv("DB_HOST")
+    db_port = os.getenv("DB_PORT")
+    db_user = os.getenv("DB_USER")
+    db_password = os.getenv("DB_PASSWORD")
+
+    if db_password:
+        database_url = (
+            f"postgresql+psycopg://"
+            f"{db_user}:{db_password}"
+            f"@{db_host}:{db_port}/{db_name}"
+        )
+    else:
+        database_url = (
+            f"postgresql+psycopg://"
+            f"{db_user}"
+            f"@{db_host}:{db_port}/{db_name}"
+        )
+
+    return create_engine(
+        database_url
     )
 
 
 def fetch_risk_metrics():
-    query = """
+    query = text("""
         SELECT
             ticker,
             total_return,
@@ -37,9 +51,9 @@ def fetch_risk_metrics():
             sharpe_ratio
         FROM risk_metrics
         ORDER BY ticker;
-    """
+    """)
 
-    with get_connection() as connection:
+    with get_engine().connect() as connection:
         return pd.read_sql(
             query,
             connection
@@ -49,29 +63,31 @@ def fetch_risk_metrics():
 def fetch_price_drawdown_series(
     ticker
 ):
-    query = """
+    query = text("""
         SELECT
             ticker,
             trade_date,
             adjusted_close,
             drawdown
         FROM price_drawdown_series
-        WHERE ticker = %s
+        WHERE ticker = :ticker
         ORDER BY trade_date;
-    """
+    """)
 
-    with get_connection() as connection:
+    with get_engine().connect() as connection:
         return pd.read_sql(
             query,
             connection,
-            params=(ticker,)
+            params={
+                "ticker": ticker
+            }
         )
 
 
 def fetch_daily_returns(
     ticker
 ):
-    query = """
+    query = text("""
         SELECT
             ticker,
             trade_date,
@@ -79,13 +95,22 @@ def fetch_daily_returns(
             previous_close,
             daily_return
         FROM daily_returns
-        WHERE ticker = %s
+        WHERE ticker = :ticker
         ORDER BY trade_date;
-    """
+    """)
 
-    with get_connection() as connection:
+    with get_engine().connect() as connection:
         return pd.read_sql(
             query,
             connection,
-            params=(ticker,)
+            params={
+                "ticker": ticker
+            }
         )
+
+if __name__ == "__main__":
+    metrics = fetch_risk_metrics()
+
+    print(
+        metrics
+    )
