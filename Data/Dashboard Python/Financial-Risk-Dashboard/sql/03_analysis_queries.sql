@@ -274,3 +274,24 @@ JOIN drawdowns dd
 
 JOIN returns r
     ON d.ticker = r.ticker;
+
+-- Price Drawdown
+
+CREATE OR REPLACE VIEW price_drawdown_series AS
+
+SELECT
+    ticker,
+    trade_date,
+    adjusted_close,
+
+    adjusted_close
+    /
+    MAX(adjusted_close) OVER (
+        PARTITION BY ticker
+        ORDER BY trade_date
+        ROWS BETWEEN UNBOUNDED PRECEDING
+        AND CURRENT ROW
+    )
+    - 1 AS drawdown
+
+FROM market_prices;
