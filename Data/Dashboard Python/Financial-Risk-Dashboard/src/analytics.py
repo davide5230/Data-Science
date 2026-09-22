@@ -1,6 +1,6 @@
 import pandas as pd
 
-from database import (
+from src.database import (
     fetch_daily_returns,
     fetch_price_drawdown_series
 )
