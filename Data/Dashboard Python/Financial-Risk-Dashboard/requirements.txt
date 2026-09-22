@@ -1,0 +1,7 @@
+pandas>=2.0
+yfinance>=0.2
+psycopg[binary]>=3.1
+python-dotenv>=1.0
+SQLAlchemy>=2.0
+dash>=2.0
+plotly>=5.0
