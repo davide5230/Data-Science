@@ -107,10 +107,3 @@ def fetch_daily_returns(
                 "ticker": ticker
             }
         )
-
-if __name__ == "__main__":
-    metrics = fetch_risk_metrics()
-
-    print(
-        metrics
-    )
