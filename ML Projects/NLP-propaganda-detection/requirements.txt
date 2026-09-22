@@ -7,9 +7,11 @@ nltk
 spacy
 transformers
 torch
-textblob
-yake
-gensim
-pyLDAvis
+beautifulsoup4
+requests
+textstat
+vaderSentiment
+sumy
+keybert
 openpyxl
 jupyter

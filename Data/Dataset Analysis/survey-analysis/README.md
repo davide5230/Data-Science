@@ -92,7 +92,7 @@ The workflow includes:
 
 ### 5. Predictive Analysis
 
-Logistic regression is used to further characterize selected groups and evaluate whether cluster membership can be predicted from respondent features.
+Logistic regression is used to characterize heavy-use behavior from the available survey features. The notebook reports in-sample diagnostics; these are descriptive and are not an estimate of out-of-sample performance.
 
 Classification metrics are used to assess model performance.
 
@@ -176,7 +176,7 @@ git clone https://github.com/davide5230/Data-Science.git
 Navigate to:
 
 ```text
-Data/Dataset Analysis/Survey Analysis/
+Data/Dataset Analysis/survey-analysis/
 ```
 
 ### 2. Install dependencies
@@ -187,10 +187,10 @@ pip install -r requirements.txt
 
 ### 3. Add the dataset
 
-Place the required CSV file inside:
+Place the required CSV file at:
 
 ```text
-data/
+data/Thesis.csv
 ```
 
 The original dataset is not distributed with the project.

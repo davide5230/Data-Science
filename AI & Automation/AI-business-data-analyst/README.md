@@ -140,17 +140,17 @@ AI-Business-Data-Analyst/
 ├── README.md
 ├── requirements.txt
 ├── .gitignore
-├── pipeline.py
-|
 ├── notebooks/
-│   └── 01_business_analysis.ipynb
+│   └── 01_data_analysis.ipynb
 |
 ├── src/
+│   ├── __init__.py
 │   ├── data_generator.py
 │   ├── analytics.py
 │   ├── insight_engine.py
 │   ├── schemas.py
-│   └── llm_report.py
+│   ├── llm_report.py
+│   └── pipeline.py
 |
 ├── outputs/
 │   └── sample_business_report.json
@@ -190,7 +190,7 @@ ollama pull qwen3.5:4b
 Open:
 
 ```text
-notebooks/01_business_analysis.ipynb
+notebooks/01_data_analysis.ipynb
 ```
 
 and execute the notebook cells in sequence.
@@ -198,7 +198,7 @@ and execute the notebook cells in sequence.
 Alternatively, after Ollama is running locally, execute the complete modular pipeline:
 
 ```bash
-python pipeline.py
+python -m src.pipeline
 ```
 
 The validated AI report will be saved under:

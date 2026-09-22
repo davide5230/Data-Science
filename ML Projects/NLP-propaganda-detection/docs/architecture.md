@@ -16,7 +16,7 @@ Text Cleaning and Preprocessing
      +-----------------------------+
      |                             |
      v                             v
-Keyword / Sentiment / NER      Topic Modeling
+KeyBERT / Sentiment / NER      LDA Topic Modeling
      |                             |
      +-------------+---------------+
                    |
@@ -24,7 +24,7 @@ Keyword / Sentiment / NER      Topic Modeling
       Propaganda & Narrative Rules
                    |
                    v
-        Transformer Summarization
+          LSA Summarization
                    |
                    v
              Output Analysis
@@ -34,10 +34,10 @@ Keyword / Sentiment / NER      Topic Modeling
 
 The pipeline deliberately combines several NLP paradigms:
 
-- **statistical methods** for feature extraction;
+- **statistical methods** for feature extraction and LSA summarization;
 - **rule-based methods** for interpretability;
 - **topic models** for unsupervised thematic exploration;
-- **transformer models** for abstractive summarization.
+- **transformer models** for emotion classification and contextual keyword embeddings.
 
 The current implementation remains notebook-driven because the project originated as an exploratory academic analysis.
 

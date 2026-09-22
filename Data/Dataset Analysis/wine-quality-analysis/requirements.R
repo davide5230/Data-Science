@@ -1,5 +1,7 @@
 required_packages <- c(
   "tidyverse",
+  "readr",
+  "fBasics",
   "ggplot2",
   "dplyr",
   "GGally",

@@ -189,7 +189,7 @@ git clone https://github.com/davide5230/Data-Science.git
 Navigate to:
 
 ```text
-Data/Dataset Analysis/Wine Quality LM Analysis R/
+Data/Dataset Analysis/wine-quality-analysis/
 ```
 
 ### 2. Install the required R packages
@@ -202,10 +202,10 @@ source("requirements.R")
 
 ### 3. Add the dataset
 
-Download the Wine Quality Dataset from Kaggle and place the required file inside:
+Download the Wine Quality Dataset from Kaggle and save it as:
 
 ```text
-data/
+data/dataset.csv
 ```
 
 Update the dataset path in the notebook if necessary.

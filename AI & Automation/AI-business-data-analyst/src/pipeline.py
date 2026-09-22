@@ -36,7 +36,8 @@ def main():
 
     report = generate_ai_report(analysis_output)
 
-    output_path = Path("outputs/business_report.json")
+    project_root = Path(__file__).resolve().parent.parent
+    output_path = project_root / "outputs" / "business_report.json"
     output_path.parent.mkdir(exist_ok=True)
 
     output_path.write_text(

@@ -12,7 +12,7 @@ The project covers the full machine-learning workflow:
 
 - **Data Cleaning & Preprocessing**: handling duplicates, missing values, outliers and categorical variables.
 - **Exploratory Data Analysis (EDA)**: analyzing feature distributions, correlations and target imbalance.
-- **Feature Preparation**: removing irrelevant variables and preparing model-ready inputs.
+- **Feature Preparation**: imputing missing values, scaling numeric fields and one-hot encoding categorical fields inside model pipelines.
 - **Class Imbalance Handling**: applying SMOTE to the training data.
 - **Model Training**: Decision Tree, Random Forest, Logistic Regression and XGBoost.
 - **Model Evaluation**: Accuracy, Precision, Recall, F1 Score and ROC AUC.
@@ -68,7 +68,7 @@ The initial dataset is inspected and prepared by:
 - handling missing values;
 - reviewing and treating outliers;
 - encoding categorical variables;
-- removing irrelevant columns.
+- retaining available predictors unless a documented data-quality rule excludes a row.
 
 ### 2. Exploratory Data Analysis
 
@@ -81,7 +81,7 @@ EDA is used to understand:
 
 ### 3. Class Imbalance Handling
 
-SMOTE is applied to the **training data** to increase representation of the minority class.
+SMOTE is applied inside each model pipeline after preprocessing and only while fitting the **training data**.
 
 This step is intended to reduce bias toward the majority class and improve the classifier's ability to identify higher-risk observations.
 
@@ -96,16 +96,15 @@ The following classifiers are compared:
 
 ### 5. Model Evaluation
 
-Models are evaluated using:
+Models are selected on the validation split using:
 
-- Accuracy
 - Precision
 - Recall
 - F1 Score
 - ROC AUC
 - ROC Curves
 
-Using several metrics provides a more complete picture than accuracy alone, particularly when classes are imbalanced.
+ROC AUC is calculated from predicted probabilities rather than hard labels. The selected model is evaluated once on a held-out test split.
 
 ### 6. Model Interpretation
 
@@ -195,7 +194,7 @@ git clone https://github.com/davide5230/Data-Science.git
 Navigate to:
 
 ```text
-ML Projects/Credit Risk Classification Analysis/
+ML Projects/credit-risk-classification/
 ```
 
 ### 2. Install dependencies
@@ -206,13 +205,13 @@ pip install -r requirements.txt
 
 ### 3. Add the dataset
 
-Download the dataset from Kaggle and place the required CSV file inside:
+Download the dataset from Kaggle and save it as:
 
 ```text
-data/
+data/credit_risk_dataset.csv
 ```
 
-Update the dataset path in the notebook if necessary.
+The notebook uses this repository-relative path.
 
 ### 4. Run the analysis
 

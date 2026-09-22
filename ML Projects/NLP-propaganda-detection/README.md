@@ -2,7 +2,7 @@
 
 This project implements a multi-stage **Natural Language Processing (NLP) pipeline** for analyzing historical and political speeches, with a focus on propaganda techniques, rhetorical patterns and narrative structures.
 
-The workflow combines text preprocessing, metadata enrichment, keyword extraction, sentiment analysis, named entity recognition, topic modeling, rule-based propaganda detection and transformer-based summarization.
+The workflow combines text preprocessing, metadata enrichment, KeyBERT keyword extraction, sentiment and emotion analysis, named entity recognition, LDA topic modeling, rule-based propaganda detection and extractive LSA summarization.
 
 ---
 
@@ -12,14 +12,14 @@ The project integrates several NLP techniques within a single analytical workflo
 
 - **Metadata Extraction**: enriching documents with biographical or contextual information from external sources.
 - **Text Preprocessing**: cleaning, tokenization, lemmatization and stopword removal.
-- **Keyword Extraction**: TF-IDF, TextRank and YAKE.
+- **Keyword Extraction**: contextual keyword extraction with KeyBERT.
 - **Readability Analysis**: measuring linguistic complexity and stylistic characteristics.
 - **Sentiment and Emotion Analysis**: profiling the emotional tone of speeches.
 - **Named Entity Recognition (NER)**: extracting people, places and organizations.
 - **Topic Modeling**: discovering latent themes with Latent Dirichlet Allocation (LDA).
 - **Propaganda Detection**: identifying selected rhetorical and propaganda patterns using interpretable rules.
 - **Narrative Analysis**: identifying recurring narrative structures such as hero/enemy framing or utopian/dystopian themes.
-- **Automatic Summarization**: generating abstractive summaries using Hugging Face transformer models.
+- **Automatic Summarization**: generating extractive summaries with Latent Semantic Analysis (LSA).
 
 ---
 

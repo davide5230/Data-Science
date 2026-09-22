@@ -61,6 +61,10 @@ def build_analysis_output(
         worst_product, "margin"
     ]
     worst_month = monthly["revenue_growth_pct"].idxmin()
+    monthly_records = monthly.reset_index().round(4).astype(object)
+    monthly_records = monthly_records.where(
+        pd.notna(monthly_records), None
+    )
 
     return {
         "metadata": {
@@ -90,8 +94,7 @@ def build_analysis_output(
             .to_dict(orient="records")
         ),
         "monthly_performance": (
-            monthly.reset_index()
-            .round(4)
+            monthly_records
             .to_dict(orient="records")
         ),
         "best_product_by_revenue": product_performance.index[0],
