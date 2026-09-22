@@ -1,1 +1,83 @@
+body {
+    margin: 0;
+    background: #f5f6f8;
+    font-family: Arial, sans-serif;
+    color: #1f2937;
+}
 
+.dashboard {
+    max-width: 1500px;
+    margin: auto;
+    padding: 32px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 28px;
+}
+
+.header h1 {
+    margin-bottom: 4px;
+}
+
+.header p {
+    margin-top: 0;
+    color: #6b7280;
+}
+
+.ticker-dropdown {
+    width: 180px;
+}
+
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 14px;
+    margin-bottom: 22px;
+}
+
+.kpi-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+.kpi-card p {
+    margin: 0;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+.kpi-card h2 {
+    margin-bottom: 0;
+}
+
+.chart-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+}
+
+.chart-grid > div,
+.full-chart {
+    background: white;
+    border-radius: 10px;
+}
+
+.full-chart {
+    margin-top: 18px;
+}
+
+@media (max-width: 1000px) {
+
+    .kpi-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .chart-grid {
+        grid-template-columns: 1fr;
+    }
+}
