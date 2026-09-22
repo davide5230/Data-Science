@@ -1,9 +1,9 @@
 import os
+from pathlib import Path
+
 import pandas as pd
 import psycopg
 import yfinance as yf
-from dotenv import load_dotenv
-from pathlib import Path
 from dotenv import load_dotenv
 
 
@@ -13,6 +13,7 @@ ENV_PATH = BASE_DIR / ".env"
 load_dotenv(
     dotenv_path=ENV_PATH
 )
+
 
 TICKERS = [
     "AAPL",
@@ -25,12 +26,31 @@ TICKERS = [
 
 
 def get_connection():
+    required_variables = [
+        "DB_NAME",
+        "DB_HOST",
+        "DB_PORT",
+        "DB_USER"
+    ]
+
+    missing = [
+        variable
+        for variable in required_variables
+        if not os.getenv(variable)
+    ]
+
+    if missing:
+        raise ValueError(
+            "Missing database configuration: "
+            + ", ".join(missing)
+        )
+
     return psycopg.connect(
         dbname=os.getenv("DB_NAME"),
         host=os.getenv("DB_HOST"),
         port=os.getenv("DB_PORT"),
         user=os.getenv("DB_USER"),
-        password=os.getenv("DB_PASSWORD")
+        password=os.getenv("DB_PASSWORD") or None
     )
 
 
@@ -50,9 +70,7 @@ def download_market_data(
             f"No data downloaded for {ticker}"
         )
 
-    data = data.reset_index()
-
-    return data
+    return data.reset_index()
 
 
 def prepare_market_data(
@@ -61,7 +79,6 @@ def prepare_market_data(
 ):
     prepared = data.copy()
 
-    # yfinance can return MultiIndex columns.
     if isinstance(
         prepared.columns,
         pd.MultiIndex
@@ -156,7 +173,6 @@ def insert_market_data(
 
 def load_all_tickers():
     with get_connection() as connection:
-
         for ticker in TICKERS:
             print(
                 f"Downloading {ticker}..."
