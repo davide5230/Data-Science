@@ -1,5 +1,7 @@
 -- Daily returns
 
+CREATE OR REPLACE VIEW daily_returns AS
+
 SELECT
     ticker,
     trade_date,
@@ -20,8 +22,4 @@ SELECT
         - 1
     ) AS daily_return
 
-FROM market_prices
-
-ORDER BY
-    ticker,
-    trade_date;
+FROM market_prices;
