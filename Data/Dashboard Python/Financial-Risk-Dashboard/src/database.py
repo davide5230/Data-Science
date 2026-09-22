@@ -1,8 +1,9 @@
 import os
 from pathlib import Path
+
 import pandas as pd
 from dotenv import load_dotenv
-from sqlalchemy import create_engine, text
+from sqlalchemy import URL, create_engine, text
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -13,29 +14,40 @@ load_dotenv(
 )
 
 
-def get_engine():
-    db_name = os.getenv("DB_NAME")
-    db_host = os.getenv("DB_HOST")
-    db_port = os.getenv("DB_PORT")
-    db_user = os.getenv("DB_USER")
-    db_password = os.getenv("DB_PASSWORD")
+def _get_database_url():
+    required_variables = [
+        "DB_NAME",
+        "DB_HOST",
+        "DB_PORT",
+        "DB_USER"
+    ]
 
-    if db_password:
-        database_url = (
-            f"postgresql+psycopg://"
-            f"{db_user}:{db_password}"
-            f"@{db_host}:{db_port}/{db_name}"
-        )
-    else:
-        database_url = (
-            f"postgresql+psycopg://"
-            f"{db_user}"
-            f"@{db_host}:{db_port}/{db_name}"
+    missing = [
+        variable
+        for variable in required_variables
+        if not os.getenv(variable)
+    ]
+
+    if missing:
+        raise ValueError(
+            "Missing database configuration: "
+            + ", ".join(missing)
         )
 
-    return create_engine(
-        database_url
+    return URL.create(
+        drivername="postgresql+psycopg",
+        username=os.getenv("DB_USER"),
+        password=os.getenv("DB_PASSWORD") or None,
+        host=os.getenv("DB_HOST"),
+        port=int(os.getenv("DB_PORT")),
+        database=os.getenv("DB_NAME")
     )
+
+
+ENGINE = create_engine(
+    _get_database_url(),
+    pool_pre_ping=True
+)
 
 
 def fetch_risk_metrics():
@@ -53,7 +65,7 @@ def fetch_risk_metrics():
         ORDER BY ticker;
     """)
 
-    with get_engine().connect() as connection:
+    with ENGINE.connect() as connection:
         return pd.read_sql(
             query,
             connection
@@ -74,7 +86,7 @@ def fetch_price_drawdown_series(
         ORDER BY trade_date;
     """)
 
-    with get_engine().connect() as connection:
+    with ENGINE.connect() as connection:
         return pd.read_sql(
             query,
             connection,
@@ -99,7 +111,7 @@ def fetch_daily_returns(
         ORDER BY trade_date;
     """)
 
-    with get_engine().connect() as connection:
+    with ENGINE.connect() as connection:
         return pd.read_sql(
             query,
             connection,
