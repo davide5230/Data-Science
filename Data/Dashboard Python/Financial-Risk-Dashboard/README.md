@@ -4,6 +4,16 @@ Interactive financial-risk analytics dashboard powered by PostgreSQL, SQL, Pytho
 
 The project ingests historical market data, stores it in PostgreSQL, computes deterministic financial-risk metrics through SQL and Python, and presents the results through an interactive dashboard.
 
+## Dashboard Preview
+
+### Overview
+
+![Financial Risk Dashboard - Overview](assets/dashboard1.png)
+
+### Risk Analytics and Correlation
+
+![Financial Risk Dashboard - Risk Analytics](assets/dashboard2.png)
+
 ## Key Features
 
 - PostgreSQL market-data storage
@@ -87,6 +97,8 @@ Financial-Risk-Dashboard/
 │   └── raw/
 │       └── .gitkeep
 ├── assets/
+│   ├── dashboard1.png
+│   ├── dashboard2.png
 │   └── style.css
 ├── docs/
 │   └── architecture.md
